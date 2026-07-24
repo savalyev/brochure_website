@@ -199,3 +199,83 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
+function initAmbientDots() {
+    const colors = [
+        'rgba(232,84,31,0.45)',
+        'rgba(245,185,66,0.4)',
+        'rgba(47,184,166,0.35)',
+        'rgba(255,255,255,0.55)'
+    ];
+
+    document.querySelectorAll('.ambient-dots').forEach(function(container) {
+        const count = parseInt(container.getAttribute('data-count'), 10) || 6;
+
+        for (let i = 0; i < count; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'ambient-dot';
+
+            const size = 150 + Math.random() * 30;
+            const duration = 1 + Math.random() * 3;
+            const delay = -(Math.random() * duration);
+
+            dot.style.width = size + 'px';
+            dot.style.height = size + 'px';
+            dot.style.left = Math.random() * 100 + '%';
+            dot.style.top = Math.random() * 100 + '%';
+            dot.style.background = 'radial-gradient(circle, ' + colors[i % colors.length] + ', transparent 70%)';
+            dot.style.animationDuration = duration + 's';
+            dot.style.animationDelay = delay + 's';
+
+            container.appendChild(dot);
+        }
+    });
+}
+
+function initCasesSlider() {
+    const track = document.getElementById('casesTrack');
+    if (!track) return;
+
+    const slides = track.children;
+    const total = slides.length;
+    let index = 0;
+    let autoplay;
+
+    const dotsWrap = document.getElementById('casesDots');
+    dotsWrap.innerHTML = '';
+
+    for (let i = 0; i < total; i++) {
+        const dot = document.createElement('button');
+        dot.className = 'cases-slider__dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', function() { goTo(i); });
+        dotsWrap.appendChild(dot);
+    }
+
+    function update() {
+        track.style.transform = 'translateX(-' + (index * 100) + '%)';
+        dotsWrap.querySelectorAll('.cases-slider__dot').forEach(function(d, i) {
+            d.classList.toggle('active', i === index);
+        });
+    }
+
+    function goTo(i) {
+        index = (i + total) % total;
+        update();
+        resetAutoplay();
+    }
+
+    function resetAutoplay() {
+        clearInterval(autoplay);
+        autoplay = setInterval(function() { goTo(index + 1); }, 5000);
+    }
+
+    document.getElementById('casesPrev').addEventListener('click', function() { goTo(index - 1); });
+    document.getElementById('casesNext').addEventListener('click', function() { goTo(index + 1); });
+
+    update();
+    resetAutoplay();
+}
+
+document.addEventListener('DOMContentLoaded', initCasesSlider);
+
+document.addEventListener('DOMContentLoaded', initAmbientDots);
