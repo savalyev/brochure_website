@@ -80,5 +80,5 @@ app.post('/api/lead', leadLimiter, async (req, res) => {
 app.get('/api/health', (req, res) => res.json({ ok: true, status: 'running' }));
 
 app.listen(PORT, () => {
-  console.log(`✅ Backend запущен: http://localhost:${PORT}`);
+  console.log(` Backend запущен: http://localhost:${PORT}`);
 });
