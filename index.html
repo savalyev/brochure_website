@@ -14,8 +14,16 @@
 <body>
 
     <div class="preloader" id="preloader">
-        <div class="preloader__logo">
-            <span>QC</span>
+        <div class="preloader__search">
+            <div class="preloader__grid">
+                <span></span><span></span><span></span>
+                <span></span><span class="found"></span><span></span>
+                <span></span><span></span><span></span>
+            </div>
+            <svg viewBox="0 0 100 100" class="preloader__glass" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="26" fill="none" stroke="#e8541f" stroke-width="7"/>
+        <line x1="59" y1="59" x2="86" y2="86" stroke="#e8541f" stroke-width="8" stroke-linecap="round"/>
+    </svg>
         </div>
     </div>
 
@@ -82,12 +90,47 @@
                 </div>
             </div>
             <div class="hero__visual">
-                <div class="orbit-ring orbit-ring--1"></div>
-                <div class="orbit-ring orbit-ring--2"></div>
-                <div class="float-dot float-dot--1"></div>
-                <div class="float-dot float-dot--2"></div>
-                <div class="float-dot float-dot--3"></div>
-                <img src="assets/logo.jpg" alt="Служба контроля качества — логотип" class="hero__logo">
+                <div class="cam-scene">
+
+                    <svg class="cam-scene__radar" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(232,84,31,0.15)" stroke-width="1"/>
+            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(232,84,31,0.12)" stroke-width="1"/>
+            <circle cx="200" cy="200" r="70" fill="none" stroke="rgba(232,84,31,0.1)" stroke-width="1"/>
+            <g class="cam-scene__sweep">
+                <path d="M200 200 L200 30 A170 170 0 0 1 340 115 Z" fill="url(#sweepGradient)"/>
+            </g>
+            <defs>
+                <linearGradient id="sweepGradient" x1="200" y1="200" x2="340" y2="115" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#e8541f" stop-opacity="0.35"/>
+                    <stop offset="1" stop-color="#e8541f" stop-opacity="0"/>
+                </linearGradient>
+            </defs>
+        </svg>
+
+                    <div class="cam-scene__body">
+                        <svg viewBox="0 0 220 200" class="cam-scene__cam-svg" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="150" width="60" height="14" rx="4" fill="var(--color-black)"/>
+                <rect x="42" y="110" width="16" height="46" fill="var(--color-black)"/>
+                <g class="cam-scene__head" style="transform-origin: 110px 100px;">
+                    <rect x="60" y="80" width="100" height="46" rx="10" fill="var(--color-black)"/>
+                    <circle cx="160" cy="103" r="26" fill="var(--color-black)"/>
+                    <circle cx="160" cy="103" r="18" fill="#111"/>
+                    <circle cx="160" cy="103" r="10" fill="var(--color-orange)" opacity="0.5"/>
+                    <circle class="cam-scene__rec" cx="72" cy="93" r="4" fill="#ff3b30"/>
+                </g>
+            </svg>
+                    </div>
+
+                    <div class="cam-scene__tags">
+                        <span class="cam-tag cam-tag--1"><i></i> СанПиН</span>
+                        <span class="cam-tag cam-tag--2"><i></i> ХАССП</span>
+                        <span class="cam-tag cam-tag--3"><i></i> Видеонаблюдение</span>
+                        <span class="cam-tag cam-tag--4"><i></i> Отчёт</span>
+                        <span class="cam-tag cam-tag--5"><i></i> Аналитика</span>
+                        <span class="cam-tag cam-tag--6"><i></i> Контроль</span>
+                    </div>
+
+                </div>
             </div>
         </div>
     </section>
@@ -101,11 +144,11 @@
             <h2 class="section__title" data-reveal>Чекап вашего заведения от практика ресторанного рынка</h2>
             <div class="about__grid">
                 <p class="about__text">
-                    Мы проводим независимый аудит ресторанов, кафе и предприятий общественного питания: проверяем соблюдение регламента СанПиН, выявляем нарушения на кухне, в баре и в зале, а главное — помогаем их устранить. Работаем на результат: не просто фиксируем проблему,
-                    а даём понятный план действий и сопровождаем внедрение улучшений.
+                    Мы проводим независимый аудит ресторанов, кафе и предприятий общественного питания: проверяем соблюдение регламента СанПиН, выявляем нарушения на кухне, в баре и в зале, а главное — помогаем их устранить. Контроль проводится <b>удалённо</b>                    — по архиву видеонаблюдения, без необходимости присутствия наших специалистов на объекте, что делает проверки незаметными для персонала и максимально объективными. Работаем на результат: не просто фиксируем проблему, а даём понятный
+                    план действий и сопровождаем внедрение улучшений.
                 </p>
                 <div class="about__quote">
-                    <p>«Качественный продукт привлекает новых гостей и удерживает постоянных — а это прямой рост выручки заведения».</p>
+                    <p>«Живой специалист замечает то, что не увидит ни одна нейросеть: усталость в глазах, скрытую грубость, недомытую тарелку между кадрами. ИИ анализирует пиксели — мы понимаем людей».</p>
                 </div>
             </div>
 
@@ -122,7 +165,7 @@
     </section>
 
     <!-- ===== SERVICES ===== -->
-    <section class="section services" id="services">
+    <section class="section services camera-frame-bg" id="services">
         <div class="ambient-dots" data-count="10"></div>
         <div class="container">
             <span class="section__pretitle" data-reveal>Услуги</span>
@@ -242,7 +285,7 @@
     </section>
 
     <!-- ===== ADVANTAGES ===== -->
-    <section class="section advantages" id="advantages">
+    <section class="section advantages camera-frame-bg" id="advantages">
         <div class="ambient-dots" data-count="10"></div>
         <div class="container">
             <span class="section__pretitle" data-reveal>Почему мы</span>
@@ -291,6 +334,19 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="slogan-banner">
+        <div class="container slogan-banner__inner">
+            <p class="slogan-banner__line slogan-banner__line--strike">Вы теряете деньги на нерадивых сотрудниках</p>
+            <p class="slogan-banner__line slogan-banner__line--accent">Зарабатывайте больше — контролируйте качество</p>
+        </div>
+        <div class="slogan-banner__benefits">
+            <div class="benefit-chip">Меньше воровства</div>
+            <div class="benefit-chip">Еда вкуснее</div>
+            <div class="benefit-chip">Качество выше</div>
+            <div class="benefit-chip">Прибыль больше</div>
         </div>
     </section>
 
@@ -527,9 +583,9 @@
           <input type="text" name="name" class="form__input" placeholder="Ваше имя" required>
         </label>
                     <label class="form__label">
-          Телефон
-          <input type="tel" name="phone" class="form__input" placeholder="+7 (___) ___-__-__" required>
-        </label>
+  Телефон
+  <input type="tel" name="phone" id="phone-input" class="form__input" placeholder="+7 (___) ___-__-__" required>
+</label>
                 </div>
                 <label class="form__label">
         Название заведения

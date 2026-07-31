@@ -1819,3 +1819,464 @@ ul {
         height: 260px;
     }
 }
+
+
+/* ============================================= */
+
+
+/* ==========  CCTV-ДЕКОРАЦИЯ В HERO  =========== */
+
+
+/* ============================================= */
+
+.cctv-deco {
+    position: absolute;
+    top: 8%;
+    right: 4%;
+    width: 160px;
+    color: var(--color-black);
+    opacity: 0.55;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cctv-deco__svg {
+    width: 100%;
+    height: auto;
+}
+
+.cctv-deco__rec {
+    animation: recBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes recBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+.cctv-deco__scan {
+    transform-origin: 120px 72px;
+    animation: scanSweep 3s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: rotate(-20deg);
+    }
+    50% {
+        opacity: 0.9;
+        transform: rotate(20deg);
+    }
+}
+
+@media (max-width: 900px) {
+    .cctv-deco {
+        width: 100px;
+        top: 4%;
+        right: 6%;
+    }
+}
+
+.cctv-deco {
+    position: absolute;
+    top: 8%;
+    right: 4%;
+    width: 160px;
+    color: var(--color-black);
+    opacity: 0.55;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cctv-deco__svg {
+    width: 100%;
+    height: auto;
+}
+
+.cctv-deco__rec {
+    animation: recBlink 1.6s ease-in-out infinite;
+}
+
+@keyframes recBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+.cctv-deco__scan {
+    transform-origin: 120px 72px;
+    animation: scanSweep 3s ease-in-out infinite;
+}
+
+@keyframes scanSweep {
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: rotate(-20deg);
+    }
+    50% {
+        opacity: 0.9;
+        transform: rotate(20deg);
+    }
+}
+
+@media (max-width: 900px) {
+    .cctv-deco {
+        width: 100px;
+        top: 4%;
+        right: 6%;
+    }
+}
+
+.about__quote {
+    position: relative;
+    border: 2px solid var(--color-black);
+}
+
+.about__quote::before {
+    content: "Человек > ИИ";
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 5px 14px;
+    border-radius: 999px;
+}
+
+.slogan-banner {
+    background: var(--color-black);
+    padding: 50px 0;
+    text-align: center;
+}
+
+.slogan-banner__line {
+    font-weight: 800;
+    margin: 0;
+}
+
+.slogan-banner__line--strike {
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 20px;
+    text-decoration: line-through;
+    margin-bottom: 10px;
+}
+
+.slogan-banner__line--accent {
+    color: var(--color-orange);
+    font-size: 34px;
+    letter-spacing: -0.01em;
+}
+
+@media (max-width: 768px) {
+    .slogan-banner__line--accent {
+        font-size: 24px;
+    }
+}
+
+.slogan-banner__benefits {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 26px;
+}
+
+.benefit-chip {
+    background: rgba(232, 84, 31, 0.15);
+    color: var(--color-white);
+    border: 1px solid rgba(232, 84, 31, 0.4);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.camera-frame-bg {
+    position: relative;
+}
+
+.camera-frame-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(232, 84, 31, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(232, 84, 31, 0.06) 1px, transparent 1px);
+    background-size: 42px 42px;
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.camera-frame-bg::after {
+    content: "REC";
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--color-orange);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+
+/* ============================================= */
+
+
+/* ==========  CAM-SCENE (HERO VISUAL)  ========= */
+
+
+/* ============================================= */
+
+.cam-scene {
+    position: relative;
+    width: 100%;
+    height: 460px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cam-scene__radar {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.cam-scene__sweep {
+    transform-origin: 200px 200px;
+    animation: sweepRotate 5s linear infinite;
+}
+
+@keyframes sweepRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.cam-scene__body {
+    position: relative;
+    z-index: 1;
+    width: 220px;
+}
+
+.cam-scene__cam-svg {
+    width: 100%;
+    height: auto;
+    color: var(--color-black);
+}
+
+.cam-scene__head {
+    animation: camPan 6s ease-in-out infinite;
+}
+
+@keyframes camPan {
+    0%,
+    100% {
+        transform: rotate(-18deg);
+    }
+    50% {
+        transform: rotate(18deg);
+    }
+}
+
+.cam-scene__rec {
+    animation: recBlink 1.4s ease-in-out infinite;
+}
+
+@keyframes recBlink {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.15;
+    }
+}
+
+.cam-scene__tags {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.cam-tag {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--color-black);
+    background: rgba(255, 255, 255, 0.85);
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(232, 84, 31, 0.25);
+    box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    animation: tagFloat 6s ease-in-out infinite;
+}
+
+.cam-tag i {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-orange);
+    flex-shrink: 0;
+}
+
+.cam-tag--1 {
+    top: 6%;
+    left: -4%;
+    animation-delay: 0s;
+}
+
+.cam-tag--2 {
+    top: 22%;
+    right: -8%;
+    animation-delay: 0.8s;
+}
+
+.cam-tag--3 {
+    top: 46%;
+    left: -12%;
+    animation-delay: 1.6s;
+}
+
+.cam-tag--4 {
+    top: 66%;
+    right: -6%;
+    animation-delay: 2.4s;
+}
+
+.cam-tag--5 {
+    top: 84%;
+    left: 2%;
+    animation-delay: 3.2s;
+}
+
+.cam-tag--6 {
+    top: 4%;
+    right: 10%;
+    animation-delay: 4s;
+}
+
+@keyframes tagFloat {
+    0%,
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    15%,
+    75% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 900px) {
+    .cam-scene {
+        height: 340px;
+    }
+    .cam-scene__body {
+        width: 150px;
+    }
+    .cam-tag {
+        font-size: 11px;
+        padding: 5px 10px;
+    }
+}
+
+.preloader__search {
+    position: relative;
+    width: 110px;
+    height: 110px;
+}
+
+.preloader__grid {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 10px;
+    padding: 14px;
+}
+
+.preloader__grid span {
+    border-radius: 4px;
+    background: rgba(232, 84, 31, 0.12);
+}
+
+.preloader__grid span.found {
+    background: var(--color-orange);
+    animation: foundPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes foundPulse {
+    0%,
+    100% {
+        opacity: 0.4;
+        box-shadow: none;
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 16px rgba(232, 84, 31, 0.7);
+    }
+}
+
+.preloader__glass {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: -8px;
+    left: -8px;
+    animation: glassSearch 2.4s ease-in-out infinite;
+    filter: drop-shadow(0 4px 10px rgba(232, 84, 31, 0.35));
+}
+
+@keyframes glassSearch {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    25% {
+        transform: translate(38px, 6px) rotate(8deg);
+    }
+    50% {
+        transform: translate(30px, 40px) rotate(-6deg);
+    }
+    75% {
+        transform: translate(4px, 34px) rotate(4deg);
+    }
+    100% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+}
