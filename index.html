@@ -2,653 +2,648 @@
 <html lang="ru">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ресторан — качество под контролем | Служба контроля качества HoReCa</title>
-    <meta name="description" content="Профессиональный аудит и контроль качества для ресторанов, кафе и предприятий общественного питания в Москве. Проверки по СанПиН, аудит персонала, устранение нарушений.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Проверка ресторанов — контроль качества по видеонаблюдению</title>
+    <meta name="description" content="Проверки ресторанов по видеонаблюдению: СанПиН, ХАССП, стандарты сети, контроль персонала. Превращаем записи с камер в понятный отчёт с рекомендациями." />
+    <meta name="theme-color" content="#0a0a0c" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Проверка ресторанов — контроль качества" />
+    <meta property="og:description" content="Проверяем. Находим. Предотвращаем. Видеоаудит кухни по СанПиН и ХАССП с готовым отчётом." />
+    <meta property="og:image" content="assets/img/hero.jpg" />
+    <meta property="og:locale" content="ru_RU" />
+
+    <link rel="icon" type="image/jpeg" href="assets/img/logo.jpg" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/style.css" />
 </head>
 
 <body>
 
-    <div class="preloader" id="preloader">
-        <div class="preloader__search">
-            <div class="preloader__grid">
-                <span></span><span></span><span></span>
-                <span></span><span class="found"></span><span></span>
-                <span></span><span></span><span></span>
-            </div>
-            <svg viewBox="0 0 100 100" class="preloader__glass" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="40" cy="40" r="26" fill="none" stroke="#e8541f" stroke-width="7"/>
-        <line x1="59" y1="59" x2="86" y2="86" stroke="#e8541f" stroke-width="8" stroke-linecap="round"/>
-    </svg>
-        </div>
-    </div>
-
-    <div class="noise-overlay"></div>
-    <div class="cursor-glow" id="cursorGlow"></div>
-
-
-    <!-- ===== HEADER ===== -->
+    <!-- ======================= HEADER ======================= -->
     <header class="header" id="header">
         <div class="container header__inner">
-            <a href="#top" class="logo">
-                <img src="assets/logo.jpg" alt="Служба контроля качества" class="logo__img">
-                <span class="logo__text">Ресторан — качество<br>под контролем</span>
+            <a href="#about" class="logo" aria-label="Проверка ресторанов — на главную">
+                <svg class="logo__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 3 L34 8 V19 C34 28 28 34.5 20 37 C12 34.5 6 28 6 19 V8 Z" stroke="currentColor" stroke-width="2.6"/>
+          <path d="M13.5 20.5 L18 25 L27 15.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+                <span class="logo__text">
+          <strong>Проверка ресторанов</strong>
+          <small>контроль качества</small>
+        </span>
             </a>
 
-            <nav class="nav" id="nav">
-                <a href="#about" class="nav__link">О компании</a>
+            <nav class="nav" id="nav" aria-label="Основная навигация">
+                <a href="#about" class="nav__link">О нас</a>
                 <a href="#services" class="nav__link">Услуги</a>
-                <a href="#process" class="nav__link">Как мы работаем</a>
-                <a href="#advantages" class="nav__link">Преимущества</a>
+                <a href="#process" class="nav__link">Процесс</a>
                 <a href="#cases" class="nav__link">Кейсы</a>
-                <a href="#faq" class="nav__link">Вопросы</a>
+                <a href="#pricing" class="nav__link">Тарифы</a>
                 <a href="#contacts" class="nav__link">Контакты</a>
+                <button class="btn btn--primary btn--sm nav__cta" data-modal-open>
+          Заказать проверку
+          <svg viewBox="0 0 24 24" class="btn__arrow" aria-hidden="true"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
             </nav>
 
-            <a href="#request" class="btn btn--primary btn--header">Оставить заявку</a>
-
-            <button class="burger" id="burger" aria-label="Меню">
-      <span></span><span></span><span></span>
-    </button>
+            <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
         </div>
     </header>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero" id="top">
-        <div class="ambient-dots" data-count="10"></div>
-        <div class="blob blob--1"></div>
-        <div class="blob blob--2"></div>
-        <div class="glow-cursor" id="glowCursor"></div>
-        <div class="container hero__inner">
-            <div class="hero__content">
-                <span class="hero__badge">HoReCa · Россия</span>
-                <h1 class="hero__title">Качество вашего заведения — <span class="accent">под полным контролем</span></h1>
-                <p class="hero__text">
-                    Профессиональный чекап ресторанов и кафе: аудит персонала, проверки по регламенту СанПиН, выявление нарушений на кухне и в зале — с чёткими рекомендациями по устранению.
-                </p>
-                <div class="hero__buttons">
-                    <a href="#request" class="btn btn--primary btn--lg">Заказать проверку</a>
-                    <a href="#services" class="btn btn--outline btn--lg">Смотреть услуги</a>
-                </div>
-                <div class="hero__stats">
-                    <div class="stat">
-                        <span class="stat__num" data-count="8" data-suffix="+">0</span>
-                        <span class="stat__label">лет в контроле качества HoReCa</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat__num" data-count="14">0</span>
-                        <span class="stat__label">лет опыта в ресторанном бизнесе</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat__num" data-count="100" data-suffix="%">0</span>
-                        <span class="stat__label">конфиденциальность отчётов</span>
-                    </div>
-                </div>
+    <main>
+        <!-- ======================= HERO ======================= -->
+        <section class="hero" id="about">
+            <!-- Фоновое фото на всю секцию + параллакс -->
+            <div class="hero__bg" data-parallax aria-hidden="true">
+                <img src="assets/img/hero.jpg" alt="" />
             </div>
-            <div class="hero__visual">
-                <div class="cam-scene">
+            <div class="hero__overlay" aria-hidden="true"></div>
+            <div class="hero__glow" aria-hidden="true"></div>
 
-                    <svg class="cam-scene__radar" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="200" cy="200" r="170" fill="none" stroke="rgba(232,84,31,0.15)" stroke-width="1"/>
-            <circle cx="200" cy="200" r="120" fill="none" stroke="rgba(232,84,31,0.12)" stroke-width="1"/>
-            <circle cx="200" cy="200" r="70" fill="none" stroke="rgba(232,84,31,0.1)" stroke-width="1"/>
-            <g class="cam-scene__sweep">
-                <path d="M200 200 L200 30 A170 170 0 0 1 340 115 Z" fill="url(#sweepGradient)"/>
-            </g>
-            <defs>
-                <linearGradient id="sweepGradient" x1="200" y1="200" x2="340" y2="115" gradientUnits="userSpaceOnUse">
-                    <stop offset="0" stop-color="#e8541f" stop-opacity="0.35"/>
-                    <stop offset="1" stop-color="#e8541f" stop-opacity="0"/>
-                </linearGradient>
-            </defs>
-        </svg>
-
-                    <div class="cam-scene__body">
-                        <svg viewBox="0 0 220 200" class="cam-scene__cam-svg" xmlns="http://www.w3.org/2000/svg">
-                <rect x="20" y="150" width="60" height="14" rx="4" fill="var(--color-black)"/>
-                <rect x="42" y="110" width="16" height="46" fill="var(--color-black)"/>
-                <g class="cam-scene__head" style="transform-origin: 110px 100px;">
-                    <rect x="60" y="80" width="100" height="46" rx="10" fill="var(--color-black)"/>
-                    <circle cx="160" cy="103" r="26" fill="var(--color-black)"/>
-                    <circle cx="160" cy="103" r="18" fill="#111"/>
-                    <circle cx="160" cy="103" r="10" fill="var(--color-orange)" opacity="0.5"/>
-                    <circle class="cam-scene__rec" cx="72" cy="93" r="4" fill="#ff3b30"/>
-                </g>
-            </svg>
+            <div class="container hero__inner">
+                <div class="hero__content">
+                    <span class="tag reveal">[ контроль качества ]</span>
+                    <h1 class="hero__title reveal" style="--d:.08s">
+                        Проверяем.<br /> Находим.
+                        <br />
+                        <span class="text-accent">Предотвращаем.</span>
+                    </h1>
+                    <p class="hero__lead reveal" style="--d:.16s">
+                        Проверки ресторанов по видеонаблюдению.<br /> СанПиН • ХАССП • Стандарты сети • Контроль персонала
+                    </p>
+                    <div class="hero__actions reveal" style="--d:.24s">
+                        <button class="btn btn--primary" data-modal-open>
+              Заказать проверку
+              <svg viewBox="0 0 24 24" class="btn__arrow" aria-hidden="true"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+                        <a href="#process" class="btn btn--ghost">Как мы работаем</a>
                     </div>
 
-                    <div class="cam-scene__tags">
-                        <span class="cam-tag cam-tag--1"><i></i> СанПиН</span>
-                        <span class="cam-tag cam-tag--2"><i></i> ХАССП</span>
-                        <span class="cam-tag cam-tag--3"><i></i> Видеонаблюдение</span>
-                        <span class="cam-tag cam-tag--4"><i></i> Отчёт</span>
-                        <span class="cam-tag cam-tag--5"><i></i> Аналитика</span>
-                        <span class="cam-tag cam-tag--6"><i></i> Контроль</span>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ABOUT ===== -->
-    <section class="section about" id="about">
-        <div class="ambient-dots" data-count="10"></div>
-        <div class="blob blob--3"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>О компании</span>
-            <h2 class="section__title" data-reveal>Чекап вашего заведения от практика ресторанного рынка</h2>
-            <div class="about__grid">
-                <p class="about__text">
-                    Мы проводим независимый аудит ресторанов, кафе и предприятий общественного питания: проверяем соблюдение регламента СанПиН, выявляем нарушения на кухне, в баре и в зале, а главное — помогаем их устранить. Контроль проводится <b>удалённо</b>                    — по архиву видеонаблюдения, без необходимости присутствия наших специалистов на объекте, что делает проверки незаметными для персонала и максимально объективными. Работаем на результат: не просто фиксируем проблему, а даём понятный
-                    план действий и сопровождаем внедрение улучшений.
-                </p>
-                <div class="about__quote">
-                    <p>«Живой специалист замечает то, что не увидит ни одна нейросеть: усталость в глазах, скрытую грубость, недомытую тарелку между кадрами. ИИ анализирует пиксели — мы понимаем людей».</p>
-                </div>
-            </div>
-
-            <div class="disclaimer">
-                <ul class="disclaimer__list">
-                    <li>Каждое замечание подтверждается фото- и видеофиксацией.</li>
-                    <li>Все нарушения сопровождаются понятным описанием и рекомендациями по устранению.</li>
-                    <li>Проверки проводятся по единым чек-листам, что позволяет объективно сравнивать результаты между объектами.</li>
-                    <li>Все материалы являются конфиденциальными и передаются только уполномоченным представителям компании.</li>
-                    <li>При регулярном сотрудничестве мы отслеживаем динамику и повторяемость нарушений, помогая снижать их количество.</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== SERVICES ===== -->
-    <section class="section services camera-frame-bg" id="services">
-        <div class="ambient-dots" data-count="10"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Услуги</span>
-            <h2 class="section__title" data-reveal>Что входит в контроль качества</h2>
-            <div class="cards-grid">
-                <div class="card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="18" cy="14" r="6" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M6 38c0-6.6 5.4-12 12-12s12 5.4 12 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-                <circle cx="33" cy="16" r="4.5" stroke="currentColor" stroke-width="2" opacity="0.55"/>
-                <path d="M27 38c0-5 3.6-9 9-9s9 4 9 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
-            </svg>
-                    </div>
-                    <h3 class="card__title">Контроль работы персонала</h3>
-                    <p class="card__text">Анализ соблюдения сотрудниками стандартов обслуживания, санитарных требований и внутренних регламентов предприятия.</p>
-                </div>
-                <div class="card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="21" cy="21" r="12" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M30 30L40 40" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-                <path d="M15 21h12M21 15v12" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-            </svg>
-                    </div>
-                    <h3 class="card__title">Видеофиксация нарушений</h3>
-                    <p class="card__text">Фиксация выявленных нарушений с использованием фото- и видеоматериалов, подтверждающих каждый факт.</p>
-                </div>
-                <div class="card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="7" width="28" height="34" rx="3" stroke="currentColor" stroke-width="2.2"/>
-                <path d="M17 18h14M17 25h14M17 32h9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M15 3h18v6H15z" fill="currentColor" opacity="0.15"/>
-            </svg>
-                    </div>
-                    <h3 class="card__title">Проверка санитарных стандартов</h3>
-                    <p class="card__text">Комплексная оценка соблюдения требований СанПиН, ХАССП и внутренних стандартов предприятия.</p>
-                </div>
-                <div class="card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M38 15a14 14 0 1 0-3.5 20" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-                <path d="M38 8v9h-9" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M18 24l4 4 8-8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
-            </svg>
-                    </div>
-                    <h3 class="card__title">Подробный аналитический отчет</h3>
-                    <p class="card__text">Подготовка структурированного отчета с приоритизацией нарушений и практическими рекомендациями по их устранению.</p>
-                </div>
-                <div class="card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M24 6L38 14V30L24 42L10 30V14L24 6Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/>
-                <path d="M24 18v12M18 24h12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
-            </svg>
-                    </div>
-                    <h3 class="card__title">Контроль устранения нарушений</h3>
-                    <p class="card__text">Повторный аудит для оценки эффективности проведенных корректирующих мероприятий и контроля результатов.</p>
-                </div>
-                <div class="card card">
-                    <div class="card__icon-badge">
-                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Оси -->
-                        <path d="M10 38 L42 38" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
-                        <path d="M10 38 L10 10" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
-                        <!-- Столбчатая диаграмма -->
-                        <rect x="14" y="26" width="6" height="12" rx="1" stroke="currentColor" stroke-width="2.2"/>
-                        <rect x="24" y="18" width="6" height="20" rx="1" stroke="currentColor" stroke-width="2.2"/>
-                        <rect x="34" y="10" width="6" height="28" rx="1" stroke="currentColor" stroke-width="2.2"/>
-                        <!-- Линия тренда -->
-                        <path d="M17 26 L27 18 L37 10" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-                        <!-- Стрелка роста -->
-                        <path d="M37 10 L40 7 M37 10 L40 13" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.55"/>
-                        <!-- Точки данных -->
-                        <circle cx="17" cy="26" r="3" fill="#fff" stroke="currentColor" stroke-width="2.2"/>
-                        <circle cx="27" cy="18" r="3" fill="#fff" stroke="currentColor" stroke-width="2.2"/>
-                        <circle cx="37" cy="10" r="3" fill="#fff" stroke="currentColor" stroke-width="2.2"/>
-                    </svg>
-                    </div>
-                    <h3 class="card__title">Аналитика и динамика качества</h3>
-                    <p class="card__text">Анализ тенденций, повторяющихся нарушений и динамики соблюдения стандартов для повышения эффективности работы предприятия.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== PROCESS ===== -->
-    <section class="section process" id="process">
-        <div class="blob blob--4"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Как мы работаем</span>
-            <h2 class="section__title" data-reveal>Прозрачный процесс от заявки до результата</h2>
-            <div class="process__grid">
-                <div class="process__step">
-                    <span class="process__num">01</span>
-                    <h3 class="process__title">Заявка и созвон</h3>
-                    <p class="process__text">Обсуждаем задачи, специфику заведения и формат проверки.</p>
-                </div>
-                <div class="process__step">
-                    <span class="process__num">02</span>
-                    <h3 class="process__title">Проверка на месте</h3>
-                    <p class="process__text">Аудит кухни, зала и персонала с фото/видеофиксацией нарушений.</p>
-                </div>
-                <div class="process__step">
-                    <span class="process__num">03</span>
-                    <h3 class="process__title">Отчёт и рекомендации</h3>
-                    <p class="process__text">Готовим подробный отчёт с выявленными нарушениями и планом их устранения.</p>
-                </div>
-                <div class="process__step">
-                    <span class="process__num">04</span>
-                    <h3 class="process__title">Внедрение улучшений</h3>
-                    <p class="process__text">Сопровождаем исправление проблем и повторно проверяем результат.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== ADVANTAGES ===== -->
-    <section class="section advantages camera-frame-bg" id="advantages">
-        <div class="ambient-dots" data-count="10"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Почему мы</span>
-            <h2 class="section__title" data-reveal>Преимущества нашего подхода</h2>
-            <div class="advantages__grid">
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">8 лет в контроле качества HoReCa</h3>
-                        <p class="advantage__text">14 лет практики в ресторанном бизнесе — знаем болевые точки изнутри.</p>
-                    </div>
-                </div>
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">Работа строго в срок</h3>
-                        <p class="advantage__text">Согласованные даты и время проверки без переносов и задержек.</p>
-                    </div>
-                </div>
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">Прозрачные отчёты</h3>
-                        <p class="advantage__text">Фиксация нарушений на фото и видео — никакой субъективности.</p>
-                    </div>
-                </div>
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">Не только выявление, но и решение</h3>
-                        <p class="advantage__text">Конкретные советы по устранению нарушений, а не просто список проблем.</p>
-                    </div>
-                </div>
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">Поиск корневых причин</h3>
-                        <p class="advantage__text">Разбираемся, почему нарушения повторяются, а не боремся со следствием.</p>
-                    </div>
-                </div>
-                <div class="advantage">
-                    <span class="advantage__check">✔</span>
-                    <div>
-                        <h3 class="advantage__title">Особое внимание критичным зонам</h3>
-                        <p class="advantage__text">Фокус на участках с наибольшим риском для гостей и репутации.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="slogan-banner">
-        <div class="container slogan-banner__inner">
-            <p class="slogan-banner__line slogan-banner__line--strike">Вы теряете деньги на нерадивых сотрудниках</p>
-            <p class="slogan-banner__line slogan-banner__line--accent">Зарабатывайте больше — контролируйте качество</p>
-        </div>
-        <div class="slogan-banner__benefits">
-            <div class="benefit-chip">Меньше воровства</div>
-            <div class="benefit-chip">Еда вкуснее</div>
-            <div class="benefit-chip">Качество выше</div>
-            <div class="benefit-chip">Прибыль больше</div>
-        </div>
-    </section>
-
-    <!-- ===== CASES ===== -->
-    <section class="section cases" id="cases">
-        <div class="blob blob--7"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Кейсы</span>
-            <h2 class="section__title" data-reveal>Примеры проверок</h2>
-
-            <div class="cases-slider" id="casesSlider">
-                <div class="cases-slider__track" id="casesTrack">
-
-                    <div class="cases-slide">
-                        <div class="cases-slide__img" style="background-image:url('assets/case-1.jpg')"></div>
-                        <div class="cases-slide__content">
-                            <span class="cases-slide__num">01</span>
-                            <h3 class="cases-slide__title">Работа без перчаток</h3>
-                            <p class="cases-slide__text">Во время приготовления роллов сотрудник выполнял сборку готовой продукции без использования одноразовых перчаток.</p>
+                    <div class="hero__stats reveal" style="--d:.32s">
+                        <div class="stat">
+                            <span class="stat__num"><span data-counter="500">0</span>+</span>
+                            <span class="stat__label">проверок проведено</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat__num"><span data-counter="12000">0</span>+</span>
+                            <span class="stat__label">нарушений найдено</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat__num"><span data-counter="98">0</span>%</span>
+                            <span class="stat__label">клиентов возвращаются</span>
                         </div>
                     </div>
-
-                    <div class="cases-slide">
-                        <div class="cases-slide__img" style="background-image:url('assets/case-2.jpg')"></div>
-                        <div class="cases-slide__content">
-                            <span class="cases-slide__num">02</span>
-                            <h3 class="cases-slide__title">Использование синей доски для рыбы при разделке сырого мяса</h3>
-                            <p class="cases-slide__text">При подготовке ингредиентов для сырого мяса использовалась разделочная доска синего цвета, предназначенная для обработки рыбы.</p>
-                        </div>
-                    </div>
-
-                    <div class="cases-slide">
-                        <div class="cases-slide__img" style="background-image:url('assets/case-3.jpg')"></div>
-                        <div class="cases-slide__content">
-                            <span class="cases-slide__num">03</span>
-                            <h3 class="cases-slide__title">Отсутствие маркировки продукции</h3>
-                            <p class="cases-slide__text">На контейнерах с подготовленными ингредиентами отсутствовала обязательная маркировка с указанием даты, времени приготовления и ответственного сотрудника.</p>
-                        </div>
-                    </div>
-
                 </div>
 
-                <button class="cases-slider__arrow cases-slider__arrow--prev" id="casesPrev" aria-label="Предыдущий кейс">‹</button>
-                <button class="cases-slider__arrow cases-slider__arrow--next" id="casesNext" aria-label="Следующий кейс">›</button>
-
-                <div class="cases-slider__dots" id="casesDots"></div>
-            </div>
-
-            <p class="cases-disclaimer">* Изображения в примерах сгенерированы нейросетью и используются исключительно для демонстрации работы</p>
-        </div>
-    </section>
-
-    <!-- ===== PRICING ===== -->
-    <section class="section pricing" id="pricing">
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Цены</span>
-            <h2 class="section__title" data-reveal>Тарифы на проверку</h2>
-            <div class="pricing__grid">
-
-                <div class="price-card">
-                    <h3 class="price-card__name">Базовый</h3>
-                    <div class="price-card__price">от ___ ₽</div>
-                    <p class="price-card__desc">Короткое описание тарифа — заполните позже.</p>
-                    <ul class="price-card__list">
-                        <li>Пункт услуги 1</li>
-                        <li>Пункт услуги 2</li>
-                        <li>Пункт услуги 3</li>
+                <!-- Панель направлений поверх фона, как на референсе -->
+                <aside class="hero__panel reveal" style="--d:.2s">
+                    <span class="hero__panel-title">[ мониторинг ]</span>
+                    <ul class="hero__panel-list">
+                        <li style="--d:.35s"><i></i>СанПиН</li>
+                        <li style="--d:.45s"><i></i>ХАССП</li>
+                        <li style="--d:.55s"><i></i>Видеонаблюдение</li>
+                        <li style="--d:.65s"><i></i>Отчёт</li>
+                        <li style="--d:.75s"><i></i>Аналитика</li>
+                        <li style="--d:.85s"><i></i>Контроль</li>
                     </ul>
-                    <a href="#request" class="btn btn--outline price-card__btn">Выбрать</a>
+                </aside>
+            </div>
+
+            <a class="hero__scroll" href="#problem" aria-label="Листайте вниз">
+                <span></span>
+            </a>
+        </section>
+
+        <!-- ======================= MARQUEE ======================= -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee__track">
+                <span>СанПиН</span><i>•</i><span>ХАССП</span><i>•</i><span>Видеонаблюдение</span><i>•</i><span>Контроль персонала</span><i>•</i><span>Стандарты сети</span><i>•</i><span>Отчёты</span><i>•</i>
+                <span>СанПиН</span><i>•</i><span>ХАССП</span><i>•</i><span>Видеонаблюдение</span><i>•</i><span>Контроль персонала</span><i>•</i><span>Стандарты сети</span><i>•</i><span>Отчёты</span><i>•</i>
+            </div>
+        </div>
+
+        <!-- ======================= PROBLEM ======================= -->
+        <section class="section problem" id="problem">
+            <!-- Камера — фон всей секции + параллакс -->
+            <div class="problem__bg" data-parallax aria-hidden="true">
+                <img src="assets/img/camera.jpg" alt="" />
+            </div>
+            <div class="problem__overlay" aria-hidden="true"></div>
+
+            <div class="container problem__layout">
+                <div class="problem__intro">
+                    <span class="tag reveal">[ проблема ]</span>
+                    <h2 class="reveal" style="--d:.08s">Почему рестораны <span class="text-accent">теряют деньги</span> каждый день?</h2>
+                    <p class="section__lead reveal" style="--d:.16s">Даже небольшие нарушения приводят к штрафам, жалобам и потере гостей.</p>
+                    <p class="problem__note reveal" style="--d:.24s">Камеры всё видят. Мы — всё фиксируем.</p>
                 </div>
 
-                <div class="price-card price-card--featured">
-                    <span class="price-card__badge">Популярный</span>
-                    <h3 class="price-card__name">Стандарт</h3>
-                    <div class="price-card__price">от ___ ₽</div>
-                    <p class="price-card__desc">Короткое описание тарифа — заполните позже.</p>
-                    <ul class="price-card__list">
-                        <li>Пункт услуги 1</li>
-                        <li>Пункт услуги 2</li>
-                        <li>Пункт услуги 3</li>
-                        <li>Пункт услуги 4</li>
+                <div class="problem__cards">
+                    <article class="violation reveal" style="--d:.05s">
+                        <span class="violation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Работа без перчаток</h3>
+                        <p>Нарушение санитарных норм и риск для гостей</p>
+                    </article>
+                    <article class="violation reveal" style="--d:.12s">
+                        <span class="violation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Телефон в рабочей зоне</h3>
+                        <p>Отвлечение от работы и нарушение регламентов</p>
+                    </article>
+                    <article class="violation reveal" style="--d:.19s">
+                        <span class="violation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Нет маркировки</h3>
+                        <p>Риск перекрёстного загрязнения продуктов</p>
+                    </article>
+                    <article class="violation reveal" style="--d:.26s">
+                        <span class="violation__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Доска не по цвету</h3>
+                        <p>Нарушение правил снижения рисков</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= SOLUTION / SERVICES ======================= -->
+        <section class="section section--alt" id="services">
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="tag">[ наше решение ]</span>
+                    <h2>Мы превращаем записи с камер в <span class="text-accent">понятный отчёт</span></h2>
+                    <p class="section__lead">Вы получаете не просто видео, а готовые выводы и рекомендации для улучшения работы.</p>
+                </div>
+
+                <div class="solution reveal">
+                    <div class="solution__callouts solution__callouts--left">
+                        <span class="callout" style="--d:.1s">[ Фото ]</span>
+                        <span class="callout" style="--d:.2s">[ Видео ]</span>
+                        <span class="callout" style="--d:.3s">[ Комментарии ]</span>
+                    </div>
+
+                    <div class="solution__media frame">
+                        <span class="frame__corner frame__corner--tl"></span>
+                        <span class="frame__corner frame__corner--tr"></span>
+                        <span class="frame__corner frame__corner--bl"></span>
+                        <span class="frame__corner frame__corner--br"></span>
+                        <img src="assets/img/tablet.jpg" alt="Отчёт по проверке ресторана: нарушения и рекомендации" loading="lazy" />
+                    </div>
+
+                    <div class="solution__callouts solution__callouts--right">
+                        <span class="callout" style="--d:.15s">[ Нарушения ]</span>
+                        <span class="callout" style="--d:.25s">[ Рекомендации ]</span>
+                        <span class="callout" style="--d:.35s">[ Аналитика ]</span>
+                    </div>
+                </div>
+
+                <div class="services">
+                    <article class="service reveal" style="--d:.05s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M3 8a2 2 0 0 1 2-2h2l1.5-2h7L17 6h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8Z" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12.5" r="3.4" stroke="currentColor" stroke-width="1.8"/></svg>
+            </span>
+                        <h3>Видеоаудит кухни</h3>
+                        <p>Просматриваем записи с ваших камер и фиксируем каждое нарушение с привязкой ко времени.</p>
+                    </article>
+                    <article class="service reveal" style="--d:.1s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="5" y="4" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="m8.5 12 2.3 2.3L15.5 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+                        <h3>Чек-листы СанПиН</h3>
+                        <p>Проверяем соблюдение санитарных норм: гигиена, хранение, обработка продуктов.</p>
+                    </article>
+                    <article class="service reveal" style="--d:.15s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 3 20 6.5v5c0 4.6-3.3 8-8 9.5-4.7-1.5-8-4.9-8-9.5v-5L12 3Z" stroke="currentColor" stroke-width="1.8"/><path d="m8.8 12.2 2.2 2.2 4.2-4.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+                        <h3>Аудит ХАССП</h3>
+                        <p>Контроль критических точек: температурные режимы, маркировка, цветовая кодировка.</p>
+                    </article>
+                    <article class="service reveal" style="--d:.2s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3.5 19c.6-3 2.8-4.5 5.5-4.5s4.9 1.5 5.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M16 8.5a3 3 0 0 1 0 5.8M18.5 15c1.4.7 2.3 1.9 2.7 3.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Контроль персонала</h3>
+                        <p>Дисциплина, регламенты, скорость работы и стандарты обслуживания — под наблюдением.</p>
+                    </article>
+                    <article class="service reveal" style="--d:.25s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 20V10M10 20V4M16 20v-8M22 20H2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Аналитика нарушений</h3>
+                        <p>Сводим нарушения в статистику: видно, где проблемы повторяются и что чинить первым.</p>
+                    </article>
+                    <article class="service reveal" style="--d:.3s">
+                        <span class="service__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M7 3h8l4 4v14H7V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 3v4h4M10 12h6M10 16h6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Стандарты сети</h3>
+                        <p>Единые чек-листы для всех точек сети и сравнение объектов между собой.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= PROCESS ======================= -->
+        <section class="section" id="process">
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="tag">[ как мы работаем ]</span>
+                    <h2>Простой процесс — <span class="text-accent">честный результат</span></h2>
+                </div>
+
+                <ol class="steps">
+                    <li class="step reveal" style="--d:.05s">
+                        <span class="step__num">01</span>
+                        <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="13" height="12" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="m16 10 5-2.5v9L16 14" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+            </span>
+                        <h3>Получаем доступ к камерам</h3>
+                        <p>Подключаемся к вашей системе видеонаблюдения или получаем записи за период.</p>
+                    </li>
+                    <li class="step reveal" style="--d:.15s">
+                        <span class="step__num">02</span>
+                        <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Проверяем записи</h3>
+                        <p>Эксперт просматривает смены по чек-листам СанПиН, ХАССП и стандартов сети.</p>
+                    </li>
+                    <li class="step reveal" style="--d:.25s">
+                        <span class="step__num">03</span>
+                        <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M6 3h9l5 5v13H6V3Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 3v5h5M9.5 13.5l2 2 3.5-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+                        <h3>Фиксируем нарушения</h3>
+                        <p>Каждое нарушение — с фото, видеофрагментом, временем и комментарием эксперта.</p>
+                    </li>
+                    <li class="step reveal" style="--d:.35s">
+                        <span class="step__num">04</span>
+                        <span class="step__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 5h16v11H4V5Z" stroke="currentColor" stroke-width="1.8"/><path d="M4 16l-1.5 4h19L20 16M9 9h6M9 12h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+            </span>
+                        <h3>Вы получаете отчёт</h3>
+                        <p>Подробный отчёт с рекомендациями: что исправить и как не допустить повторения.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- ======================= CASES ======================= -->
+        <section class="section section--alt" id="cases">
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="tag">[ кейсы ]</span>
+                    <h2>Реальные нарушения, <span class="text-accent">которые мы находим</span></h2>
+                    <p class="section__lead">Примеры из практики. Каждый кейс — это деньги, которые ресторан перестал терять.</p>
+                </div>
+
+                <!-- Чтобы добавить кейс: скопируй блок <article class="case"> и поменяй тексты -->
+                <div class="cases-slider">
+                    <div class="cases" id="cases-track">
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-1.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Работа без перчаток</h3>
+                                <p>Сотрудник осуществляет приготовление или сборку готовой продукции без использования одноразовых перчаток.</p>
+                            </div>
+                        </article>
+
+                        <article class="case reveal" style="--d:.12s">
+                            <div class="case__visual" style="background-image: url('assets/img/case-2.jpg')">
+                            </div>
+                            <div class="case__body">
+                                <h3>Сотрудник не моет руки после использования телефона</h3>
+                                <p>После использования мобильного телефона сотрудник продолжает работу с пищевой продукцией без обработки рук или замены перчаток.</p>
+                            </div>
+                        </article>
+
+                        <article class="case reveal" style="--d:.19s">
+                            <div class="case__visual" style="background-image: url('assets/img/case-3.jpg')">
+                            </div>
+                            <div class="case__body">
+                                <h3>Распределение блюд без весов</h3>
+                                <p>Сотрудник порционирует готовую продукцию без использования весов, определяя количество ингредиентов на глаз.</p>
+                            </div>
+                        </article>
+
+                        <article class="case reveal" style="--d:.26s">
+                            <div class="case__visual" style="background-image: url('assets/img/case-4.jpg')">
+                            </div>
+                            <div class="case__body">
+                                <h3>Работа без головного убора</h3>
+                                <p>Сушист готовит продукцию без головного убора.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-5.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Посторонние предметы на разделочной доске</h3>
+                                <p>На разделочной доске находятся личные вещи сотрудника: мобильный телефон, беспроводные наушники и напитки.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-6.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Загрязнённая разделочная доска и рабочая поверхность</h3>
+                                <p>Разделочная доска и рабочая поверхность своевременно не очищаются в течение рабочей смены, на них присутствуют остатки продуктов.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-7.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Использование телефона в рабочее время</h3>
+                                <p>Сотрудник использует мобильный телефон во время работы вместо приготовления поступивших заказов.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-8.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Несвоевременная замена перчаток</h3>
+                                <p>Сотрудник касается лица рукой в перчатке, после чего продолжает работу с продуктами без замены перчаток.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-9.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Употребление алкоголя на рабочем месте</h3>
+                                <p>Бармен употребляет алкогольный напиток непосредственно на рабочем месте во время рабочей смены.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-10.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Возможное несанкционированное присвоение продукции</h3>
+                                <p>Сотрудник помещает продукт в личную сумку, что может свидетельствовать о попытке несанкционированного выноса продукции предприятия.</p>
+                            </div>
+                        </article>
+                        <article class="case reveal" style="--d:.05s">
+                            <div style="background-image: url('assets/img/case-11.jpg')" class="case__visual">
+                            </div>
+                            <div class="case__body">
+                                <h3>Использование одной тряпки в течение смены/работа без перчаток</h3>
+                                <p>Для протирания ножа после нарезки роллов сотрудник использует одну и ту же производственную тряпку без своевременной замены и санитарной обработки. Также на фото зафиксировано дополнительное нарушение — сотрудник выполняет
+                                    работу без использования одноразовых перчаток.</p>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="cases-nav">
+                        <button class="cases-arrow" id="cases-prev" aria-label="Предыдущие кейсы" disabled>
+      <svg viewBox="0 0 24 24"><path d="M20 12H5m0 0 6-6m-6 6 6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+                        <div class="cases-progress"><span id="cases-bar"></span></div>
+                        <button class="cases-arrow" id="cases-next" aria-label="Следующие кейсы">
+      <svg viewBox="0 0 24 24"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= INCLUDED ======================= -->
+        <section class="section" id="included">
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="tag">[ что входит ]</span>
+                    <h2>Полный <span class="text-accent">контроль</span> по ключевым направлениям</h2>
+                </div>
+
+                <div class="included reveal" style="--d:.1s">
+                    <ul class="included__col">
+                        <li>СанПиН</li>
+                        <li>ХАССП</li>
+                        <li>Технологические карты</li>
+                        <li>Стандарты сети</li>
                     </ul>
-                    <a href="#request" class="btn btn--primary price-card__btn">Выбрать</a>
-                </div>
-
-                <div class="price-card">
-                    <h3 class="price-card__name">Премиум</h3>
-                    <div class="price-card__price">от ___ ₽</div>
-                    <p class="price-card__desc">Короткое описание тарифа — заполните позже.</p>
-                    <ul class="price-card__list">
-                        <li>Пункт услуги 1</li>
-                        <li>Пункт услуги 2</li>
-                        <li>Пункт услуги 3</li>
-                        <li>Пункт услуги 4</li>
-                        <li>Пункт услуги 5</li>
+                    <ul class="included__col">
+                        <li>Скорость работы</li>
+                        <li>Соблюдение регламентов</li>
+                        <li>Контроль персонала</li>
                     </ul>
-                    <a href="#request" class="btn btn--outline price-card__btn">Выбрать</a>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FAQ ===== -->
-    <section class="section faq" id="faq">
-        <div class="ambient-dots" data-count="10"></div>
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Вопросы и ответы</span>
-            <h2 class="section__title" data-reveal>Что важно знать перед обращением</h2>
-            <div class="accordion" id="accordion">
-                <div class="accordion__item">
-                    <button class="accordion__header">Как проходит проверка?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>После предоставления доступа к архиву видеонаблюдения наши специалисты анализируют записи по утвержденному чек-листу. Все выявленные нарушения сопровождаются фото- и видеофиксацией, подробным описанием и рекомендациями по устранению.
-                            По итогам вы получаете структурированный отчет в удобном формате.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Что входит в итоговый отчет?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Каждый отчет включает: 1. Перечень выявленных нарушений. 2. Фото- и видеофиксацию. 3. Дату и время каждого события. 4. Оценку уровня критичности. 5. Рекомендации по устранению. 6. Общую аналитику по объекту.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Можно ли проверять несколько ресторанов одновременно?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Да. Мы работаем как с отдельными заведениями, так и с ресторанными сетями. Для каждого объекта формируется отдельный отчет, что позволяет сравнивать результаты между ресторанами и отслеживать динамику.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Насколько конфиденциальны материалы?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Вся информация хранится конфиденциально. Фото-, видеоматериалы и отчеты передаются только уполномоченным представителям заказчика и не передаются третьим лицам.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Что делать, если найдены критические нарушения?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Критические нарушения выделяются отдельно и сопровождаются подробными рекомендациями. Это позволяет руководству оперативно устранить проблему и минимизировать риски для бизнеса.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Можно ли проводить проверки регулярно?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Да. Большинство клиентов выбирают ежемесячный формат сотрудничества. Регулярные проверки позволяют отслеживать динамику, выявлять повторяющиеся нарушения и поддерживать единый стандарт работы во всех подразделениях.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Что делать после получения отчета?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Отчет уже содержит практические рекомендации по каждому нарушению. Руководителю остается распределить задачи между ответственными сотрудниками и контролировать выполнение. При следующих проверках можно оценить эффективность принятых
-                            мер.
-                        </p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Чем ваш аудит отличается от просмотра камер своими силами?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Мы проводим системный анализ по профессиональному чек-листу. Наши специалисты знают, на какие нарушения обращать внимание, фиксируют даже неочевидные отклонения и предлагают конкретные решения, а не просто список замечаний.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Как быстро вы предоставляете результаты?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Срок подготовки отчета зависит от объема проверки, но в большинстве случаев результаты предоставляются в течение 1–3 рабочих дней после завершения анализа видеозаписей.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Проверка гарантирует прохождение проверки Роспотребнадзора?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Наш видеоаудит помогает выявить и устранить видимые нарушения до того, как они станут системной проблемой. Регулярный контроль способствует повышению уровня соблюдения внутренних стандартов и санитарных требований, однако решение
-                            о результатах официальной проверки всегда принимает контролирующий орган.</p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Зачем проводить проверки, если у нас есть управляющий?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Управляющий отвечает за ежедневную работу ресторана. Независимый видеоаудит позволяет посмотреть на процессы со стороны, выявить нарушения, которые остаются незамеченными в повседневной работе, и получить объективную оценку по
-                            единым стандартам.
-                        </p>
-                    </div>
-                </div>
-                <div class="accordion__item">
-                    <button class="accordion__header">Какую пользу это приносит бизнесу?
-          <span class="accordion__icon">+</span>
-        </button>
-                    <div class="accordion__body">
-                        <p>Регулярный видеоаудит помогает: повысить дисциплину персонала; снизить количество повторяющихся нарушений; улучшить соблюдение внутренних стандартов; повысить качество продукции и сервиса; сократить риски жалоб гостей; предоставить
-                            руководству объективную картину происходящего в ресторане.</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== REQUEST FORM ===== -->
-    <section class="section request" id="request">
-        <div class="blob blob--5"></div>
-        <div class="blob blob--6"></div>
-        <div class="container request__inner">
-            <div class="request__text">
-                <span class="section__pretitle section__pretitle--light" data-reveal>Заявка</span>
-                <h2 class="section__title section__title--light">Оставьте заявку на проверку</h2>
-                <p class="request__desc">Заполните форму — мы свяжемся с вами для уточнения деталей и назначим удобное время проверки. Работаем в Москве.</p>
-            </div>
-
-            <form class="form" id="request-form" novalidate>
-                <div class="form__row">
-                    <label class="form__label">
-          Имя
-          <input type="text" name="name" class="form__input" placeholder="Ваше имя" required>
-        </label>
-                    <label class="form__label">
-  Телефон
-  <input type="tel" name="phone" id="phone-input" class="form__input" placeholder="+7 (___) ___-__-__" required>
-</label>
-                </div>
-                <label class="form__label">
-        Название заведения
-        <input type="text" name="company" class="form__input" placeholder="Например, «Кафе Уют»">
-      </label>
-                <label class="form__label">
-        Комментарий
-        <textarea name="message" class="form__input form__input--textarea" placeholder="Расскажите о вашей ситуации или задаче"></textarea>
-      </label>
-                <label class="form__checkbox">
-        <input type="checkbox" name="agree" required>
-        <span>Даю согласие на обработку персональных данных</span>
-      </label>
-                <button type="submit" class="btn btn--primary btn--lg form__submit">Отправить заявку</button>
-                <p class="form__status" id="form-status"></p>
-            </form>
-        </div>
-    </section>
-
-    <!-- ===== CONTACTS ===== -->
-    <section class="section contacts" id="contacts">
-        <div class="container">
-            <span class="section__pretitle" data-reveal>Контакты</span>
-            <h2 class="section__title" data-reveal>Свяжитесь с нами</h2>
-            <div class="contacts__grid">
-                <div class="contact-item">
-                    <div>
-                        <h3 class="contact-item__title">Телефон</h3>
-                        <a href="tel:#" class="contact-item__value" data-placeholder="phone">+7 (993) 483-96-48</a>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div>
-                        <h3 class="contact-item__title">Регион работы</h3>
-                        <span class="contact-item__value">Россия</span>
-                    </div>
+                    <ul class="included__col">
+                        <li>Условия хранения</li>
+                        <li>Чистота и гигиена</li>
+                        <li>Оборудование</li>
+                        <li>Выдача заказов</li>
+                    </ul>
                 </div>
             </div>
+        </section>
 
-            <div class="socials">
-                <a href="https://t.me/chekuprest" class="social-link" data-placeholder="tg-channel">Telegram-канал</a>
+        <!-- ======================= PRICING ======================= -->
+        <section class="section section--alt" id="pricing">
+            <div class="container">
+                <div class="section__head reveal">
+                    <span class="tag">[ тарифы ]</span>
+                    <h2>Выберите формат <span class="text-accent">под вашу задачу</span></h2>
+                    <p class="section__lead">Цены — ориентировочные. Точная стоимость зависит от количества камер и объёма записей.</p>
+                </div>
+
+                <div class="pricing">
+                    <article class="plan reveal" style="--d:.05s">
+                        <h3 class="plan__name">Разовая проверка</h3>
+                        <div class="plan__price">9 000 <span>₽</span></div>
+                        <p class="plan__desc">Подойдёт для знакомства с сервисом, разового аудита или дополнительного контроля объекта.</p>
+                        <ul class="plan__list">
+                            <li>Проверка одного объекта</li>
+                            <li>Просмотр до 10 камер видеонаблюдения</li>
+                            <li>Анализ работы сотрудников по согласованному чек-листу</li>
+                            <li>Фиксация выявленных нарушений</li>
+                            <li>Скриншоты с камер с примерами нарушений</li>
+                            <li>Структурированный отчёт по итогам проверки</li>
+                            <li>рекомендации по устранению выявленных нарушений</li>
+                        </ul>
+                        <button class="btn btn--ghost plan__btn" data-modal-open>Оставить заявку</button>
+                    </article>
+
+                    <article class="plan plan--featured reveal" style="--d:.15s">
+                        <span class="plan__flag">Популярный</span>
+                        <h3 class="plan__name">От 10 проверок в месяц</h3>
+                        <div class="plan__price">8 000 <span>₽</span></div>
+                        <p class="plan__desc">Для регулярного контроля ресторанов и небольших сетей.</p>
+                        <ul class="plan__list">
+                            <li>Просмотр до 10 камер</li>
+                            <li>Проверка по согласованному чек-листу</li>
+                            <li>Контроль соблюдения санитарных норм и внутренних стандартов</li>
+                            <li>Фиксация выявленных нарушений</li>
+                            <li>Структурированный отчёт по каждой проверке</li>
+                            <li>Выявление повторяющихся нарушений</li>
+                        </ul>
+                        <button class="btn btn--primary plan__btn" data-modal-open>
+              Оставить заявку
+              <svg viewBox="0 0 24 24" class="btn__arrow" aria-hidden="true"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+                    </article>
+
+                    <article class="plan reveal" style="--d:.25s">
+                        <h3 class="plan__name">От 20 проверок в месяц</h3>
+                        <div class="plan__price">7 000 <span>₽</span></div>
+                        <p class="plan__desc">Оптимальный формат для ресторанных сетей и системного контроля нескольких объектов.</p>
+                        <ul class="plan__list">
+                            <li>Просмотр до 10 камер</li>
+                            <li>Проверка по согласованному чек-листу</li>
+                            <li>Контроль соблюдения санитарных норм и внутренних регламентов</li>
+                            <li>Фиксация нарушений и подтверждающие материалы</li>
+                            <li>Отчёт по каждой проведённой проверке</li>
+                            <li>Выявление повторяющихся и системных нарушений</li>
+                            <li>Возможность анализа результатов по объектам</li>
+                        </ul>
+                        <button class="btn btn--ghost plan__btn" data-modal-open>Обсудить условия</button>
+                    </article>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- ===== FOOTER ===== -->
+        <!-- ======================= CTA / CONTACTS ======================= -->
+        <section class="section cta" id="contacts">
+            <div class="container cta__inner">
+                <div class="cta__content reveal">
+                    <span class="tag">[ начните сегодня ]</span>
+                    <h2>Готовы узнать, что происходит <span class="text-accent">на вашей кухне?</span></h2>
+                    <p class="section__lead">Оставьте заявку — и мы проверим ваш ресторан уже сегодня.</p>
+                    <div class="cta__actions">
+                        <button class="btn btn--primary btn--lg" data-modal-open>
+              Заказать проверку
+              <svg viewBox="0 0 24 24" class="btn__arrow" aria-hidden="true"><path d="M4 12h15m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+                    </div>
+                    <div class="cta__contacts">
+                        <a href="tel:+79934839648" class="contact-link">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a12 12 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>                            +7 (993) 483-96-48
+                        </a>
+                        <a href="https://t.me/chekuprest" target="_blank" rel="noopener" class="contact-link">
+                            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 4 3.5 10.7c-.8.3-.8 1.4.1 1.6l4.4 1.4 1.7 5c.3.8 1.3.9 1.8.2l2.4-3 4.4 3.2c.6.5 1.6.1 1.7-.7l2.5-13c.1-.9-.8-1.6-1.5-1.4Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>                            t.me/chekuprest
+                        </a>
+                    </div>
+                </div>
+
+                <div class="cta__media reveal" style="--d:.15s">
+                    <div class="cta__badge-glow" aria-hidden="true"></div>
+                    <img src="assets/img/badge.jpg" alt="Знак службы контроля качества" loading="lazy" />
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================= FOOTER ======================= -->
     <footer class="footer">
         <div class="container footer__inner">
-            <a href="#top" class="logo logo--footer">
-                <img src="assets/logo.jpg" alt="Служба контроля качества" class="logo__img">
-                <span class="logo__text">Ресторан — качество<br>под контролем</span>
+            <a href="#about" class="logo" aria-label="Проверка ресторанов">
+                <svg class="logo__mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <path d="M20 3 L34 8 V19 C34 28 28 34.5 20 37 C12 34.5 6 28 6 19 V8 Z" stroke="currentColor" stroke-width="2.6"/>
+          <path d="M13.5 20.5 L18 25 L27 15.5" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+                <span class="logo__text">
+          <strong>Проверка ресторанов</strong>
+          <small>контроль качества</small>
+        </span>
             </a>
-            <p class="footer__copy">© 2026. Все права защищены. Консультативные услуги контроля качества HoReCa, г. Москва.</p>
-            <br>
-            <p class="footer__copy">svvvlyxv developer</p>
+
+            <nav class="footer__nav" aria-label="Навигация в подвале">
+                <a href="#about">О нас</a>
+                <a href="#services">Услуги</a>
+                <a href="#process">Процесс</a>
+                <a href="#cases">Кейсы</a>
+                <a href="#pricing">Тарифы</a>
+            </nav>
+
+            <div class="footer__contacts">
+                <a href="tel:+79934839648">+7 (993) 483-96-48</a>
+                <a href="https://t.me/proverka_restoranov" target="_blank" rel="noopener">Telegram: t.me/chekuprest</a>
+            </div>
+        </div>
+        <div class="container footer__bottom">
+            <span>© 2026 Проверка ресторанов. Все права защищены.</span>
+            <span>Сделано с контролем качества</span>
         </div>
     </footer>
 
-    <a href="#request" class="fab" id="fab" aria-label="Оставить заявку">
-        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="fab__icon">
-        <path d="M6 40L42 24L6 8L6 20L30 24L6 28L6 40Z" fill="currentColor"/>
-    </svg>
-    </a>
+    <!-- ======================= MODAL ======================= -->
+    <div class="modal" id="modal" aria-hidden="true">
+        <div class="modal__overlay" data-modal-close></div>
+        <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+            <button class="modal__close" data-modal-close aria-label="Закрыть форму">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </button>
+
+            <!-- Форма -->
+            <div class="modal__state modal__state--form" data-state="form">
+                <span class="tag">[ заявка ]</span>
+                <h2 id="modal-title">Заказать проверку</h2>
+                <p class="modal__lead">Заполните форму — свяжемся в течение рабочего дня и обсудим детали.</p>
+
+                <form id="lead-form" novalidate>
+                    <div class="field">
+                        <label for="f-name">Ваше имя <i>*</i></label>
+                        <input type="text" id="f-name" name="name" placeholder="Иван" autocomplete="name" required />
+                        <span class="field__error">Укажите имя</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-phone">Телефон <i>*</i></label>
+                        <input type="tel" id="f-phone" name="phone" placeholder="+375 (29) 000-00-00" autocomplete="tel" required />
+                        <span class="field__error">Введите телефон полностью</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-restaurant">Название ресторана <i>*</i></label>
+                        <input type="text" id="f-restaurant" name="restaurant" placeholder="Ресторан «Пример»" autocomplete="organization" required />
+                        <span class="field__error">Укажите название ресторана</span>
+                    </div>
+                    <div class="field">
+                        <label for="f-comment">Комментарий</label>
+                        <textarea id="f-comment" name="comment" rows="3" placeholder="Количество камер, точек, удобное время для связи…"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn--primary btn--block" id="submit-btn">
+            <span class="btn__label">Отправить заявку</span>
+            <span class="btn__loader" aria-hidden="true"></span>
+          </button>
+                    <p class="form-note">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+                </form>
+            </div>
+
+            <!-- Успех -->
+            <div class="modal__state modal__state--success" data-state="success" hidden>
+                <span class="modal__status-icon modal__status-icon--ok" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </span>
+                <h2>Заявка отправлена!</h2>
+                <p class="modal__lead">Мы получили вашу заявку и свяжемся с вами в ближайшее время.</p>
+                <button class="btn btn--ghost" data-modal-close>Закрыть</button>
+            </div>
+
+            <!-- Ошибка -->
+            <div class="modal__state modal__state--error" data-state="error" hidden>
+                <span class="modal__status-icon modal__status-icon--err" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </span>
+                <h2>Не удалось отправить</h2>
+                <p class="modal__lead">Попробуйте ещё раз или напишите нам в Telegram — <a href="https://t.me/proverka_restoranov" target="_blank" rel="noopener">@proverka_restoranov</a></p>
+                <button class="btn btn--primary" data-back-to-form>Вернуться к форме</button>
+            </div>
+        </div>
+    </div>
 
     <script src="js/script.js"></script>
 </body>

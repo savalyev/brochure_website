@@ -1,311 +1,384 @@
-document.addEventListener('DOMContentLoaded', function() {
+/* ============================================================
+   ПРОВЕРКА РЕСТОРАНОВ — main.js
+   ============================================================ */
 
-    const burger = document.getElementById('burger');
-    const nav = document.getElementById('nav');
+/* ================================================================
+   ⚙️ НАСТРОЙКА: вставь сюда URL своего эндпоинта.
+   Форма отправляет POST с JSON:
+   {
+     "name":       "Иван",
+     "phone":      "+375 (29) 000-00-00",
+     "restaurant": "Ресторан «Пример»",
+     "comment":    "..."        // может быть пустой строкой
+   }
+   Ожидается ответ 2xx = успех, иначе покажется экран ошибки.
+   ================================================================ */
+const API_ENDPOINT = ""; // например: "https://api.mysite.by/api/leads"
 
-    burger.addEventListener('click', function() {
-        nav.classList.toggle('open');
-    });
+/* ------------------------------------------------------------
+   1. Хедер: фон при скролле
+   ------------------------------------------------------------ */
+const header = document.getElementById("header");
 
-    nav.querySelectorAll('.nav__link').forEach(function(link) {
-        link.addEventListener('click', function() {
-            nav.classList.remove('open');
+const onScrollHeader = () => {
+    header.classList.toggle("is-scrolled", window.scrollY > 24);
+};
+window.addEventListener("scroll", onScrollHeader, { passive: true });
+onScrollHeader();
+
+/* ------------------------------------------------------------
+   2. Мобильное меню (бургер)
+   ------------------------------------------------------------ */
+const burger = document.getElementById("burger");
+const nav = document.getElementById("nav");
+
+const toggleMenu = (force) => {
+    const open = force ?? !nav.classList.contains("is-open");
+    nav.classList.toggle("is-open", open);
+    burger.classList.toggle("is-open", open);
+    burger.setAttribute("aria-expanded", String(open));
+    document.body.classList.toggle("no-scroll", open);
+};
+
+burger.addEventListener("click", () => toggleMenu());
+nav.querySelectorAll("a").forEach((link) =>
+    link.addEventListener("click", () => toggleMenu(false))
+);
+
+/* ------------------------------------------------------------
+   3. Подсветка активного пункта меню (IntersectionObserver)
+   ------------------------------------------------------------ */
+const sections = document.querySelectorAll("main section[id]");
+const navLinks = document.querySelectorAll(".nav__link");
+
+const sectionObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            navLinks.forEach((link) =>
+                link.classList.toggle(
+                    "is-active",
+                    link.getAttribute("href") === `#${entry.target.id}`
+                )
+            );
         });
-    });
+    }, { rootMargin: "-40% 0px -55% 0px" }
+);
+sections.forEach((s) => sectionObserver.observe(s));
 
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 20) {
-            header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
-        } else {
-            header.style.boxShadow = 'none';
-        }
-    });
-
-    const accordionItems = document.querySelectorAll('.accordion__item');
-
-    accordionItems.forEach(function(item) {
-        const header = item.querySelector('.accordion__header');
-        const body = item.querySelector('.accordion__body');
-
-        header.addEventListener('click', function() {
-            const isActive = item.classList.contains('active');
-
-            accordionItems.forEach(function(el) {
-                el.classList.remove('active');
-                el.querySelector('.accordion__body').style.maxHeight = null;
-            });
-
-            if (!isActive) {
-                item.classList.add('active');
-                body.style.maxHeight = body.scrollHeight + 'px';
-            }
-        });
-    });
-
-    const revealTargets = document.querySelectorAll(
-        '.card, .process__step, .advantage, .case-card, .about__quote'
-    );
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+/* ------------------------------------------------------------
+   4. Reveal-анимации при скролле
+   ------------------------------------------------------------ */
+const revealObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add("is-visible");
                 observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+);
+document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-    revealTargets.forEach(function(el) {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(24px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
-    });
+/* ------------------------------------------------------------
+   5. Счётчики цифр в hero
+   ------------------------------------------------------------ */
+const animateCounter = (el) => {
+    const target = Number(el.dataset.counter);
+    const duration = 1600;
+    const start = performance.now();
 
-    const BACKEND_LEAD_ENDPOINT = 'http://localhost:3000/api/lead';
+    const tick = (now) => {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        el.textContent = Math.round(target * eased).toLocaleString("ru-RU");
+        if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+};
 
-    const form = document.getElementById('request-form');
-    const status = document.getElementById('form-status');
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-        const payload = {
-            name: formData.get('name'),
-            phone: formData.get('phone'),
-            company: formData.get('company'),
-            message: formData.get('message')
-        };
-
-        if (!payload.name || !payload.phone) {
-            status.textContent = 'Заполните имя и телефон.';
-            return;
-        }
-
-        status.textContent = 'Отправка...';
-
-        submitLead(payload)
-            .then(function() {
-                status.textContent = 'Заявка отправлена! Мы свяжемся с вами в ближайшее время.';
-                form.reset();
-            })
-            .catch(function() {
-                status.textContent = 'Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую.';
-            });
-    });
-
-    function submitLead(payload) {
-        if (!BACKEND_LEAD_ENDPOINT) {
-            console.log('Lead payload:', payload);
-            return Promise.resolve();
-        }
-
-        return fetch(BACKEND_LEAD_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-    }
-
-});
-
-
-document.addEventListener('DOMContentLoaded', function() {
-
-    const preloader = document.getElementById('preloader');
-    window.addEventListener('load', function() {
-        setTimeout(function() {
-            preloader.classList.add('hide');
-        }, 400);
-    });
-    setTimeout(function() { preloader.classList.add('hide'); }, 1500);
-
-    const cursorGlow = document.getElementById('cursorGlow');
-    if (cursorGlow) {
-        let mouseX = window.innerWidth / 2;
-        let mouseY = window.innerHeight / 2;
-        let currentX = mouseX;
-        let currentY = mouseY;
-
-        window.addEventListener('mousemove', function(e) {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        function animateGlow() {
-            currentX += (mouseX - currentX) * 0.12;
-            currentY += (mouseY - currentY) * 0.12;
-            cursorGlow.style.transform = 'translate(' + currentX + 'px, ' + currentY + 'px) translate(-50%, -50%)';
-            requestAnimationFrame(animateGlow);
-        }
-        animateGlow();
-    }
-
-    const counters = document.querySelectorAll('.stat__num[data-count]');
-
-    function animateCounter(el) {
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        const suffix = el.getAttribute('data-suffix') || '';
-        const duration = 1400;
-        const start = performance.now();
-
-        function tick(now) {
-            const progress = Math.min((now - start) / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const value = Math.floor(eased * target);
-            el.textContent = value + suffix;
-            if (progress < 1) {
-                requestAnimationFrame(tick);
-            } else {
-                el.textContent = target + suffix;
-            }
-        }
-        requestAnimationFrame(tick);
-    }
-
-    const counterObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+const counterObserver = new IntersectionObserver(
+    (entries, observer) => {
+        entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 animateCounter(entry.target);
-                counterObserver.unobserve(entry.target);
+                observer.unobserve(entry.target);
             }
         });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.6 }
+);
+document.querySelectorAll("[data-counter]").forEach((el) => counterObserver.observe(el));
 
-    counters.forEach(function(el) { counterObserver.observe(el); });
+/* ------------------------------------------------------------
+   6. Параллакс фоновых изображений секций ([data-parallax])
+   Фон смещается медленнее скролла — эффект глубины.
+   ------------------------------------------------------------ */
+const parallaxBlocks = document.querySelectorAll("[data-parallax]");
+const PARALLAX_SPEED = 0.12; // 0 = статично, 0.2 = заметно
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const revealHeaders = document.querySelectorAll('[data-reveal]');
-    const headerObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('in-view');
-                headerObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.2 });
+const updateParallax = () => {
+    const viewportH = window.innerHeight;
 
-    revealHeaders.forEach(function(el) { headerObserver.observe(el); });
+    parallaxBlocks.forEach((bg) => {
+        const rect = bg.parentElement.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > viewportH) return; // вне экрана — не трогаем
 
-    const blobs = document.querySelectorAll('.blob');
-    window.addEventListener('scroll', function() {
-        const scrollY = window.scrollY;
-        blobs.forEach(function(blob, i) {
-            const speed = 0.03 + (i % 3) * 0.01;
-            blob.style.transform = 'translateY(' + (scrollY * speed) + 'px)';
-        });
+        // Прогресс прохождения секции через вьюпорт: -1 … 1
+        const progress = (rect.top + rect.height / 2 - viewportH / 2) / (viewportH / 2);
+        const offset = progress * rect.height * PARALLAX_SPEED;
+        bg.style.transform = `translateY(${offset.toFixed(1)}px)`;
     });
+};
 
+if (!reduceMotion && parallaxBlocks.length) {
+    let parallaxTicking = false;
+    const onScrollParallax = () => {
+        if (parallaxTicking) return;
+        parallaxTicking = true;
+        requestAnimationFrame(() => {
+            updateParallax();
+            parallaxTicking = false;
+        });
+    };
+    window.addEventListener("scroll", onScrollParallax, { passive: true });
+    window.addEventListener("resize", onScrollParallax);
+    updateParallax();
+}
+
+/* ------------------------------------------------------------
+   7. Модальное окно
+   ------------------------------------------------------------ */
+const modal = document.getElementById("modal");
+const formState = modal.querySelector('[data-state="form"]');
+const successState = modal.querySelector('[data-state="success"]');
+const errorState = modal.querySelector('[data-state="error"]');
+let lastFocused = null;
+
+const setModalState = (state) => {
+    formState.hidden = state !== "form";
+    successState.hidden = state !== "success";
+    errorState.hidden = state !== "error";
+};
+
+const openModal = () => {
+    lastFocused = document.activeElement;
+    setModalState("form");
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.classList.add("no-scroll");
+    setTimeout(() => modal.querySelector("#f-name") ?.focus(), 350);
+};
+
+const closeModal = () => {
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.classList.remove("no-scroll");
+    lastFocused ?.focus();
+};
+
+document.querySelectorAll("[data-modal-open]").forEach((btn) =>
+    btn.addEventListener("click", openModal)
+);
+modal.querySelectorAll("[data-modal-close]").forEach((el) =>
+    el.addEventListener("click", closeModal)
+);
+modal.querySelector("[data-back-to-form]").addEventListener("click", () =>
+    setModalState("form")
+);
+
+document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
 });
 
-function initAmbientDots() {
-    const colors = [
-        'rgba(232,84,31,0.45)',
-        'rgba(245,185,66,0.4)',
-        'rgba(47,184,166,0.35)',
-        'rgba(255,255,255,0.55)'
-    ];
+/* ------------------------------------------------------------
+   8. Маска телефона +7 (XXX) XXX-XX-XX
+   ------------------------------------------------------------ */
+const phoneInput = document.getElementById("f-phone");
 
-    document.querySelectorAll('.ambient-dots').forEach(function(container) {
-        const count = parseInt(container.getAttribute('data-count'), 10) || 6;
+const formatPhone = (digits) => {
+  let result = "+7";
+  if (digits.length > 1) result += " (" + digits.slice(1, 4);
+  if (digits.length >= 4) result += ") " + digits.slice(4, 7);
+  if (digits.length > 7) result += "-" + digits.slice(7, 9);
+  if (digits.length > 9) result += "-" + digits.slice(9, 11);
+  return result;
+};
 
-        for (let i = 0; i < count; i++) {
-            const dot = document.createElement('div');
-            dot.className = 'ambient-dot';
+// При фокусе на пустое поле сразу подставляем +7 (
+phoneInput.addEventListener("focus", () => {
+  if (!phoneInput.value) {
+    phoneInput.value = "+7 (";
+    // Курсор — в конец, чтобы не прыгал перед скобкой
+    requestAnimationFrame(() =>
+      phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length)
+    );
+  }
+});
 
-            const size = 150 + Math.random() * 30;
-            const duration = 1 + Math.random() * 3;
-            const delay = -(Math.random() * duration);
+phoneInput.addEventListener("input", () => {
+  let digits = phoneInput.value.replace(/\D/g, "");
 
-            dot.style.width = size + 'px';
-            dot.style.height = size + 'px';
-            dot.style.left = Math.random() * 100 + '%';
-            dot.style.top = Math.random() * 100 + '%';
-            dot.style.background = 'radial-gradient(circle, ' + colors[i % colors.length] + ', transparent 70%)';
-            dot.style.animationDuration = duration + 's';
-            dot.style.animationDelay = delay + 's';
+  // Нормализуем начало номера под +7 (8xxx → 7xxx, иначе дописываем 7)
+  if (digits.startsWith("8")) digits = "7" + digits.slice(1);
+  if (!digits.startsWith("7")) digits = "7" + digits;
+  digits = digits.slice(0, 11); // 7 + 10 цифр
 
-            container.appendChild(dot);
+  phoneInput.value = formatPhone(digits);
+});
+
+// Если стёрли всё до "+7" — разрешаем очистить поле полностью
+phoneInput.addEventListener("keydown", (e) => {
+  if (e.key === "Backspace" && phoneInput.value.replace(/\D/g, "").length <= 1) {
+    e.preventDefault();
+    phoneInput.value = "";
+  }
+});
+
+// Ушли с поля, оставив только префикс — очищаем, чтобы не срабатывала валидация
+phoneInput.addEventListener("blur", () => {
+  if (phoneInput.value.replace(/\D/g, "").length <= 1) phoneInput.value = "";
+});
+
+/* ------------------------------------------------------------
+   9. Валидация и отправка формы
+   ------------------------------------------------------------ */
+const form = document.getElementById("lead-form");
+const submitBtn = document.getElementById("submit-btn");
+
+const setFieldError = (input, hasError) => {
+    input.closest(".field").classList.toggle("has-error", hasError);
+};
+
+const validate = () => {
+    const name = form.name;
+    const phone = form.phone;
+    const restaurant = form.restaurant;
+    let valid = true;
+
+    const nameOk = name.value.trim().length >= 2;
+    setFieldError(name, !nameOk);
+    valid = valid && nameOk;
+
+    const phoneOk = phone.value.replace(/\D/g, "").length === 12;
+    setFieldError(phone, !phoneOk);
+    valid = valid && phoneOk;
+
+    const restOk = restaurant.value.trim().length >= 2;
+    setFieldError(restaurant, !restOk);
+    valid = valid && restOk;
+
+    return valid;
+};
+
+// Живая очистка ошибки при вводе
+form.querySelectorAll("input, textarea").forEach((input) =>
+    input.addEventListener("input", () => setFieldError(input, false))
+);
+
+form.addEventListener("submit", async(e) => {
+    e.preventDefault();
+    if (!validate()) return;
+
+    const payload = {
+        name: form.name.value.trim(),
+        phone: form.phone.value.trim(),
+        restaurant: form.restaurant.value.trim(),
+        comment: form.comment.value.trim(),
+    };
+
+    submitBtn.classList.add("is-loading");
+
+    try {
+        if (!API_ENDPOINT) {
+            // Эндпоинт ещё не указан — имитируем успешную отправку,
+            // чтобы можно было протестировать интерфейс.
+            console.log("[lead-form] payload:", payload);
+            await new Promise((r) => setTimeout(r, 900));
+        } else {
+            const response = await fetch(API_ENDPOINT, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload),
+            });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
         }
+
+        form.reset();
+        setModalState("success");
+    } catch (err) {
+        console.error("[lead-form] Ошибка отправки:", err);
+        setModalState("error");
+    } finally {
+        submitBtn.classList.remove("is-loading");
+    }
+});
+
+/* ------------------------------------------------------------
+   10. Карусель кейсов: стрелки, прогресс, drag-скролл
+   ------------------------------------------------------------ */
+const casesTrack = document.getElementById("cases-track");
+const casesPrev = document.getElementById("cases-prev");
+const casesNext = document.getElementById("cases-next");
+const casesBar = document.getElementById("cases-bar");
+
+if (casesTrack && casesPrev && casesNext && casesBar) {
+    // Шаг прокрутки = ширина одной карточки + gap
+    const getStep = () => {
+        const card = casesTrack.querySelector(".case");
+        if (!card) return casesTrack.clientWidth;
+        const gap = parseFloat(getComputedStyle(casesTrack).gap) || 20;
+        return card.getBoundingClientRect().width + gap;
+    };
+
+    const updateCasesNav = () => {
+        const maxScroll = casesTrack.scrollWidth - casesTrack.clientWidth;
+        casesPrev.disabled = casesTrack.scrollLeft <= 5;
+        casesNext.disabled = casesTrack.scrollLeft >= maxScroll - 5;
+
+        const progress = maxScroll > 0 ? casesTrack.scrollLeft / maxScroll : 1;
+        const visibleRatio = casesTrack.clientWidth / casesTrack.scrollWidth;
+        casesBar.style.width = `${(visibleRatio + (1 - visibleRatio) * progress) * 100}%`;
+    };
+
+    casesPrev.addEventListener("click", () =>
+        casesTrack.scrollBy({ left: -getStep(), behavior: "smooth" })
+    );
+    casesNext.addEventListener("click", () =>
+        casesTrack.scrollBy({ left: getStep(), behavior: "smooth" })
+    );
+
+    casesTrack.addEventListener("scroll", updateCasesNav, { passive: true });
+    window.addEventListener("resize", updateCasesNav);
+    updateCasesNav();
+
+    // Drag-скролл мышью (на тач-устройствах работает нативный свайп)
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+    let moved = false;
+
+    casesTrack.addEventListener("pointerdown", (e) => {
+        if (e.pointerType !== "mouse") return;
+        isDown = true;
+        moved = false;
+        startX = e.clientX;
+        startScroll = casesTrack.scrollLeft;
+    });
+
+    window.addEventListener("pointermove", (e) => {
+        if (!isDown) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 6) {
+            moved = true;
+            casesTrack.classList.add("is-dragging");
+        }
+        if (moved) casesTrack.scrollLeft = startScroll - dx;
+    });
+
+    window.addEventListener("pointerup", () => {
+        isDown = false;
+        casesTrack.classList.remove("is-dragging");
     });
 }
-
-function initCasesSlider() {
-    const track = document.getElementById('casesTrack');
-    if (!track) return;
-
-    const slides = track.children;
-    const total = slides.length;
-    let index = 0;
-    let autoplay;
-
-    const dotsWrap = document.getElementById('casesDots');
-    dotsWrap.innerHTML = '';
-
-    for (let i = 0; i < total; i++) {
-        const dot = document.createElement('button');
-        dot.className = 'cases-slider__dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', function() { goTo(i); });
-        dotsWrap.appendChild(dot);
-    }
-
-    function update() {
-        track.style.transform = 'translateX(-' + (index * 100) + '%)';
-        dotsWrap.querySelectorAll('.cases-slider__dot').forEach(function(d, i) {
-            d.classList.toggle('active', i === index);
-        });
-    }
-
-    function goTo(i) {
-        index = (i + total) % total;
-        update();
-        resetAutoplay();
-    }
-
-    function resetAutoplay() {
-        clearInterval(autoplay);
-        autoplay = setInterval(function() { goTo(index + 1); }, 5000);
-    }
-
-    document.getElementById('casesPrev').addEventListener('click', function() { goTo(index - 1); });
-    document.getElementById('casesNext').addEventListener('click', function() { goTo(index + 1); });
-
-    update();
-    resetAutoplay();
-}
-
-document.addEventListener('DOMContentLoaded', initCasesSlider);
-
-document.addEventListener('DOMContentLoaded', initAmbientDots);
-
-function initPhoneMask() {
-    const phoneInput = document.getElementById('phone-input');
-    if (!phoneInput) return;
-
-    phoneInput.addEventListener('focus', function() {
-        if (!phoneInput.value) {
-            phoneInput.value = '+7 ';
-        }
-    });
-
-    phoneInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-
-        if (!value.startsWith('7')) {
-            value = '7' + value;
-        }
-        value = value.slice(0, 11);
-
-        let formatted = '+7';
-        if (value.length > 1) formatted += ' (' + value.slice(1, 4);
-        if (value.length >= 4) formatted += ') ' + value.slice(4, 7);
-        if (value.length >= 7) formatted += '-' + value.slice(7, 9);
-        if (value.length >= 9) formatted += '-' + value.slice(9, 11);
-
-        e.target.value = formatted;
-    });
-}
-
-document.addEventListener('DOMContentLoaded', initPhoneMask);
