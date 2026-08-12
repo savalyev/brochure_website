@@ -198,47 +198,47 @@ document.addEventListener("keydown", (e) => {
 const phoneInput = document.getElementById("f-phone");
 
 const formatPhone = (digits) => {
-  let result = "+7";
-  if (digits.length > 1) result += " (" + digits.slice(1, 4);
-  if (digits.length >= 4) result += ") " + digits.slice(4, 7);
-  if (digits.length > 7) result += "-" + digits.slice(7, 9);
-  if (digits.length > 9) result += "-" + digits.slice(9, 11);
-  return result;
+    let result = "+7";
+    if (digits.length > 1) result += " (" + digits.slice(1, 4);
+    if (digits.length >= 4) result += ") " + digits.slice(4, 7);
+    if (digits.length > 7) result += "-" + digits.slice(7, 9);
+    if (digits.length > 9) result += "-" + digits.slice(9, 11);
+    return result;
 };
 
 // При фокусе на пустое поле сразу подставляем +7 (
 phoneInput.addEventListener("focus", () => {
-  if (!phoneInput.value) {
-    phoneInput.value = "+7 (";
-    // Курсор — в конец, чтобы не прыгал перед скобкой
-    requestAnimationFrame(() =>
-      phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length)
-    );
-  }
+    if (!phoneInput.value) {
+        phoneInput.value = "+7 (";
+        // Курсор — в конец, чтобы не прыгал перед скобкой
+        requestAnimationFrame(() =>
+            phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length)
+        );
+    }
 });
 
 phoneInput.addEventListener("input", () => {
-  let digits = phoneInput.value.replace(/\D/g, "");
+    let digits = phoneInput.value.replace(/\D/g, "");
 
-  // Нормализуем начало номера под +7 (8xxx → 7xxx, иначе дописываем 7)
-  if (digits.startsWith("8")) digits = "7" + digits.slice(1);
-  if (!digits.startsWith("7")) digits = "7" + digits;
-  digits = digits.slice(0, 11); // 7 + 10 цифр
+    // Нормализуем начало номера под +7 (8xxx → 7xxx, иначе дописываем 7)
+    if (digits.startsWith("8")) digits = "7" + digits.slice(1);
+    if (!digits.startsWith("7")) digits = "7" + digits;
+    digits = digits.slice(0, 11); // 7 + 10 цифр
 
-  phoneInput.value = formatPhone(digits);
+    phoneInput.value = formatPhone(digits);
 });
 
 // Если стёрли всё до "+7" — разрешаем очистить поле полностью
 phoneInput.addEventListener("keydown", (e) => {
-  if (e.key === "Backspace" && phoneInput.value.replace(/\D/g, "").length <= 1) {
-    e.preventDefault();
-    phoneInput.value = "";
-  }
+    if (e.key === "Backspace" && phoneInput.value.replace(/\D/g, "").length <= 1) {
+        e.preventDefault();
+        phoneInput.value = "";
+    }
 });
 
 // Ушли с поля, оставив только префикс — очищаем, чтобы не срабатывала валидация
 phoneInput.addEventListener("blur", () => {
-  if (phoneInput.value.replace(/\D/g, "").length <= 1) phoneInput.value = "";
+    if (phoneInput.value.replace(/\D/g, "").length <= 1) phoneInput.value = "";
 });
 
 /* ------------------------------------------------------------
@@ -261,7 +261,7 @@ const validate = () => {
     setFieldError(name, !nameOk);
     valid = valid && nameOk;
 
-    const phoneOk = phone.value.replace(/\D/g, "").length === 12;
+    const phoneOk = phone.value.replace(/\D/g, "").length === 11;
     setFieldError(phone, !phoneOk);
     valid = valid && phoneOk;
 
