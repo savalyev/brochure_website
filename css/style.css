@@ -1125,27 +1125,11 @@ h2 {
 
 /* Заглушки-градиенты. Замените на background-image с реальными фото */
 
-.case__visual--1 {
-    background: radial-gradient(circle at 30% 30%, #2a2a33, #101014), linear-gradient(160deg, #1e1e26, #0d0d10);
-}
-
-.case__visual--2 {
-    background: radial-gradient(circle at 70% 40%, #29242a, #101014), linear-gradient(200deg, #1e1e26, #0d0d10);
-}
-
-.case__visual--3 {
-    background: radial-gradient(circle at 40% 70%, #242931, #101014), linear-gradient(140deg, #1e1e26, #0d0d10);
-}
-
-.case__visual--4 {
-    background: radial-gradient(circle at 65% 25%, #2a2622, #101014), linear-gradient(180deg, #1e1e26, #0d0d10);
-}
 
 .case__visual::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle at 50% 55%, transparent 30%, rgba(255, 90, 31, 0.07) 31%, transparent 34%), linear-gradient(to top, rgba(10, 10, 12, 0.55), transparent 60%);
 }
 
 .case__badge {
