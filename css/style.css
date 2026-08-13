@@ -1972,3 +1972,14 @@ body.no-scroll {
         transform: none;
     }
 }
+
+
+        .generateii {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 14px 28px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.2s ease;
+        }
