@@ -1251,6 +1251,7 @@ h2 {
     border: 1px solid var(--line);
     border-radius: var(--radius);
     padding: 44px 40px;
+    box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.85), 0 0 70px -25px var(--accent-glow);
 }
 
 .included__col li {
