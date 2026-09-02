@@ -57,7 +57,7 @@ function buildEmailHtml({ name, phone, company, message }) {
 
 app.post('/api/lead', leadLimiter, async (req, res) => {
   try {
-    const { name, phone, company, message } = req.body;
+    const { name, phone, company, comment } = req.body;
 
     if (!name || !phone) {
       return res.status(400).json({ ok: false, error: 'Поля "имя" и "телефон" обязательны.' });
@@ -67,7 +67,7 @@ app.post('/api/lead', leadLimiter, async (req, res) => {
       from: `"Сайт QC" <${EMAIL_USER}>`,
       to: EMAIL_TO,
       subject: 'Новая заявка с сайта proverkarest.ru',
-      html: buildEmailHtml({ name, phone, company, message })
+      html: buildEmailHtml({ name, phone, company, comment })
     });
 
     return res.json({ ok: true });
