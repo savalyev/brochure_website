@@ -44,13 +44,13 @@ function escapeHtml(str = '') {
         .replace(/>/g, '&gt;');
 }
 
-function buildEmailHtml({ name, phone, company, message }) {
+function buildEmailHtml({ name, phone, company, comment }) {
     return `
     <h2>🔔 Новая заявка с сайта</h2>
     <p><b>Имя:</b> ${escapeHtml(name)}</p>
     <p><b>Телефон:</b> ${escapeHtml(phone)}</p>
     ${company ? `<p><b>Заведение:</b> ${escapeHtml(company)}</p>` : ''}
-    ${message ? `<p><b>Комментарий:</b> ${escapeHtml(message)}</p>` : ''}
+    ${comment ? `<p><b>Комментарий:</b> ${escapeHtml(comment)}</p>` : ''}
     <p><small>${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}</small></p>
   `;
 }
