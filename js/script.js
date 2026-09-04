@@ -241,11 +241,16 @@ phoneInput.addEventListener("blur", () => {
     if (phoneInput.value.replace(/\D/g, "").length <= 1) phoneInput.value = "";
 });
 
+
 /* ------------------------------------------------------------
    9. Валидация и отправка формы
    ------------------------------------------------------------ */
 const form = document.getElementById("lead-form");
 const submitBtn = document.getElementById("submit-btn");
+
+form.querySelector("#f-consent").addEventListener("change", (e) =>
+  setFieldError(e.target, false)
+);
 
 const setFieldError = (input, hasError) => {
     input.closest(".field").classList.toggle("has-error", hasError);
@@ -268,6 +273,11 @@ const validate = () => {
     const restOk = restaurant.value.trim().length >= 2;
     setFieldError(restaurant, !restOk);
     valid = valid && restOk;
+
+    const consent = form.querySelector("#f-consent");
+    const consentOk = consent.checked;
+    setFieldError(consent, !consentOk);
+    valid = valid && consentOk;
 
     return valid;
 };
