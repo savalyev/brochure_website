@@ -1,23 +1,6 @@
-/* ============================================================
-   ПРОВЕРКА РЕСТОРАНОВ — main.js
-   ============================================================ */
+const API_ENDPOINT = "https://proverkarest.ru/api/lead";
 
-/* ================================================================
-   ⚙️ НАСТРОЙКА: вставь сюда URL своего эндпоинта.
-   Форма отправляет POST с JSON:
-   {
-     "name":       "Иван",
-     "phone":      "+375 (29) 000-00-00",
-     "restaurant": "Ресторан «Пример»",
-     "comment":    "..."        // может быть пустой строкой
-   }
-   Ожидается ответ 2xx = успех, иначе покажется экран ошибки.
-   ================================================================ */
-const API_ENDPOINT = "https://proverkarest.ru/api/lead"; // например: "https://api.mysite.by/api/leads"
 
-/* ------------------------------------------------------------
-   1. Хедер: фон при скролле
-   ------------------------------------------------------------ */
 const header = document.getElementById("header");
 
 const onScrollHeader = () => {
@@ -26,9 +9,6 @@ const onScrollHeader = () => {
 window.addEventListener("scroll", onScrollHeader, { passive: true });
 onScrollHeader();
 
-/* ------------------------------------------------------------
-   2. Мобильное меню (бургер)
-   ------------------------------------------------------------ */
 const burger = document.getElementById("burger");
 const nav = document.getElementById("nav");
 
@@ -45,9 +25,6 @@ nav.querySelectorAll("a").forEach((link) =>
     link.addEventListener("click", () => toggleMenu(false))
 );
 
-/* ------------------------------------------------------------
-   3. Подсветка активного пункта меню (IntersectionObserver)
-   ------------------------------------------------------------ */
 const sections = document.querySelectorAll("main section[id]");
 const navLinks = document.querySelectorAll(".nav__link");
 
@@ -66,9 +43,6 @@ const sectionObserver = new IntersectionObserver(
 );
 sections.forEach((s) => sectionObserver.observe(s));
 
-/* ------------------------------------------------------------
-   4. Reveal-анимации при скролле
-   ------------------------------------------------------------ */
 const revealObserver = new IntersectionObserver(
     (entries, observer) => {
         entries.forEach((entry) => {
@@ -81,9 +55,6 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll(".reveal").forEach((el) => revealObserver.observe(el));
 
-/* ------------------------------------------------------------
-   5. Счётчики цифр в hero
-   ------------------------------------------------------------ */
 const animateCounter = (el) => {
     const target = Number(el.dataset.counter);
     const duration = 1600;
@@ -91,7 +62,7 @@ const animateCounter = (el) => {
 
     const tick = (now) => {
         const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3); // easeOutCubic
+        const eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = Math.round(target * eased).toLocaleString("ru-RU");
         if (progress < 1) requestAnimationFrame(tick);
     };
@@ -110,12 +81,8 @@ const counterObserver = new IntersectionObserver(
 );
 document.querySelectorAll("[data-counter]").forEach((el) => counterObserver.observe(el));
 
-/* ------------------------------------------------------------
-   6. Параллакс фоновых изображений секций ([data-parallax])
-   Фон смещается медленнее скролла — эффект глубины.
-   ------------------------------------------------------------ */
 const parallaxBlocks = document.querySelectorAll("[data-parallax]");
-const PARALLAX_SPEED = 0.12; // 0 = статично, 0.2 = заметно
+const PARALLAX_SPEED = 0.12; 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const updateParallax = () => {
@@ -123,9 +90,8 @@ const updateParallax = () => {
 
     parallaxBlocks.forEach((bg) => {
         const rect = bg.parentElement.getBoundingClientRect();
-        if (rect.bottom < 0 || rect.top > viewportH) return; // вне экрана — не трогаем
+        if (rect.bottom < 0 || rect.top > viewportH) return; 
 
-        // Прогресс прохождения секции через вьюпорт: -1 … 1
         const progress = (rect.top + rect.height / 2 - viewportH / 2) / (viewportH / 2);
         const offset = progress * rect.height * PARALLAX_SPEED;
         bg.style.transform = `translateY(${offset.toFixed(1)}px)`;
@@ -147,9 +113,6 @@ if (!reduceMotion && parallaxBlocks.length) {
     updateParallax();
 }
 
-/* ------------------------------------------------------------
-   7. Модальное окно
-   ------------------------------------------------------------ */
 const modal = document.getElementById("modal");
 const formState = modal.querySelector('[data-state="form"]');
 const successState = modal.querySelector('[data-state="success"]');
@@ -192,9 +155,6 @@ document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
 });
 
-/* ------------------------------------------------------------
-   8. Маска телефона +7 (XXX) XXX-XX-XX
-   ------------------------------------------------------------ */
 const phoneInput = document.getElementById("f-phone");
 
 const formatPhone = (digits) => {
@@ -206,11 +166,9 @@ const formatPhone = (digits) => {
     return result;
 };
 
-// При фокусе на пустое поле сразу подставляем +7 (
 phoneInput.addEventListener("focus", () => {
     if (!phoneInput.value) {
         phoneInput.value = "+7 (";
-        // Курсор — в конец, чтобы не прыгал перед скобкой
         requestAnimationFrame(() =>
             phoneInput.setSelectionRange(phoneInput.value.length, phoneInput.value.length)
         );
@@ -220,15 +178,13 @@ phoneInput.addEventListener("focus", () => {
 phoneInput.addEventListener("input", () => {
     let digits = phoneInput.value.replace(/\D/g, "");
 
-    // Нормализуем начало номера под +7 (8xxx → 7xxx, иначе дописываем 7)
     if (digits.startsWith("8")) digits = "7" + digits.slice(1);
     if (!digits.startsWith("7")) digits = "7" + digits;
-    digits = digits.slice(0, 11); // 7 + 10 цифр
+    digits = digits.slice(0, 11); 
 
     phoneInput.value = formatPhone(digits);
 });
 
-// Если стёрли всё до "+7" — разрешаем очистить поле полностью
 phoneInput.addEventListener("keydown", (e) => {
     if (e.key === "Backspace" && phoneInput.value.replace(/\D/g, "").length <= 1) {
         e.preventDefault();
@@ -236,15 +192,10 @@ phoneInput.addEventListener("keydown", (e) => {
     }
 });
 
-// Ушли с поля, оставив только префикс — очищаем, чтобы не срабатывала валидация
 phoneInput.addEventListener("blur", () => {
     if (phoneInput.value.replace(/\D/g, "").length <= 1) phoneInput.value = "";
 });
 
-
-/* ------------------------------------------------------------
-   9. Валидация и отправка формы
-   ------------------------------------------------------------ */
 const form = document.getElementById("lead-form");
 const submitBtn = document.getElementById("submit-btn");
 
@@ -282,7 +233,6 @@ const validate = () => {
     return valid;
 };
 
-// Живая очистка ошибки при вводе
 form.querySelectorAll("input, textarea").forEach((input) =>
     input.addEventListener("input", () => setFieldError(input, false))
 );
@@ -302,8 +252,6 @@ form.addEventListener("submit", async(e) => {
 
     try {
         if (!API_ENDPOINT) {
-            // Эндпоинт ещё не указан — имитируем успешную отправку,
-            // чтобы можно было протестировать интерфейс.
             console.log("[lead-form] payload:", payload);
             await new Promise((r) => setTimeout(r, 900));
         } else {
@@ -325,16 +273,12 @@ form.addEventListener("submit", async(e) => {
     }
 });
 
-/* ------------------------------------------------------------
-   10. Карусель кейсов: стрелки, прогресс, drag-скролл
-   ------------------------------------------------------------ */
 const casesTrack = document.getElementById("cases-track");
 const casesPrev = document.getElementById("cases-prev");
 const casesNext = document.getElementById("cases-next");
 const casesBar = document.getElementById("cases-bar");
 
 if (casesTrack && casesPrev && casesNext && casesBar) {
-    // Шаг прокрутки = ширина одной карточки + gap
     const getStep = () => {
         const card = casesTrack.querySelector(".case");
         if (!card) return casesTrack.clientWidth;
@@ -363,7 +307,6 @@ if (casesTrack && casesPrev && casesNext && casesBar) {
     window.addEventListener("resize", updateCasesNav);
     updateCasesNav();
 
-    // Drag-скролл мышью (на тач-устройствах работает нативный свайп)
     let isDown = false;
     let startX = 0;
     let startScroll = 0;
