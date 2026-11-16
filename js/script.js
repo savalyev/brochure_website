@@ -1,4 +1,5 @@
-const API_ENDPOINT = "https://proverkarest.ru/api/lead";
+// Относительный путь: фронт и API на одном домене (nginx проксирует /api на Node).
+const API_ENDPOINT = "/api/lead";
 
 
 const header = document.getElementById("header");
@@ -246,6 +247,7 @@ form.addEventListener("submit", async(e) => {
         phone: form.phone.value.trim(),
         restaurant: form.restaurant.value.trim(),
         comment: form.comment.value.trim(),
+        consent: form.querySelector("#f-consent").checked,
     };
 
     submitBtn.classList.add("is-loading");

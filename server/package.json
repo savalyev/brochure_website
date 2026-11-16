@@ -1,7 +1,7 @@
 {
     "name": "qc-lead-backend",
     "version": "1.0.0",
-    "description": "Backend for sending website lead form submissions to Telegram",
+    "description": "Backend for sending website lead form submissions by email",
     "main": "server.js",
     "type": "commonjs",
     "scripts": {
